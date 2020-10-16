@@ -148,30 +148,68 @@ PROVIDER model
 REQUESTED SERVICE model
 
 ```javascript
- {
-   title: {type: String, required: true},
-   type: {type: String, required: true},
-   done: {type: Boolean, required: true},
-   platform: {type: String, required: true},
-   image: {type: String, required: true}
-   description: {type, String, required: true}
-   user: {type: Schema.Types.ObjectId,ref:'User'},
- }
+  {
+    userId: { type: mongoose.ObjectId, ref: "User", required: true },
+    // menuOwnerRef: { type: mongoose.ObjectId, ref: "Cook", required: true },
+    orders: [
+      {
+        menuId: {
+          type: mongoose.ObjectId,
+          ref: "Menu",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
+  }
+);
 ```
 
 ACCEPTED SERVICE model
 
 ```javascript
- {
-   title: {type: String, required: true},
-   type: {type: String, required: true},
-   done: {type: Boolean, required: true},
-   platform: {type: String, required: true},
-   image: {type: String, required: true}
-   description: {type, String, required: true}
-   user: {type: Schema.Types.ObjectId,ref:'User'},
- }
+  {
+    userId: { type: mongoose.ObjectId, ref: "User", required: true },
+    // menuOwnerRef: { type: mongoose.ObjectId, ref: "Cook", required: true },
+    orders: [
+      {
+        menuId: {
+          type: mongoose.ObjectId,
+          ref: "Menu",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          default: 0,
+        },
+      },
+    ],
+  },
+  {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
+  }
+);
 ```
+
+SESSION
+ {
+    timestamps: {
+      createdAt: "created_at",
+      updatedAt: "updated_at",
+    },
+  }
 
 
 <br>
