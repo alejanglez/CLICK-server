@@ -1,24 +1,28 @@
 # CLICK
 
-## HANDICAPS
+## Features
 
 - Signup/Login - MVP
 - Authentication - MVP
 - Requested services/ Accepted services/ Pending services - MVP
 - Rating/Comments - MVP
-- Categories filter – MVP
+- Categories/Day filter – MVP
 - Images and uploading files– MVP
+
+- Dates filter - BACKLOG
+- Show request details - BACKLOG
 - Social media connection -BACKLOG
-- Distance -BACKLOG
-- OTP -BACKLOG
-- Calendar -BACKLOG
+- Distance - Location -BACKLOG
+- Calendar - Availability -BACKLOG
 - Payment platform –BACKLOG
 - Private message and contact – BACKLOG
+- Notifications - BACKLOG
+- OTP - One time password -BACKLOG
 
 
 ## Description
 
-This is an app that conecting familily´s children who need support with academic services of providers.
+This is an app that connects familily´s children who need support with academic services of providers.
 
 ## User Stories
 
