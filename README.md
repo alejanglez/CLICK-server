@@ -2,18 +2,18 @@
 
 ## HANDICAPS
 
-Signup/Login - MVP
-Authentication - MVP
-Requested services/ Accepted services/ Pending services - MVP
-Rating/Comments - MVP
-Categories filter – MVP
-Images and uploading files– MVP
-Social media connection -BACKLOG
-Distance -BACKLOG
-OTP -BACKLOG
-Calendar -BACKLOG
-Payment platform –BACKLOG
-Private message and contact – BACKLOG
+- Signup/Login - MVP
+- Authentication - MVP
+- Requested services/ Accepted services/ Pending services - MVP
+- Rating/Comments - MVP
+- Categories filter – MVP
+- Images and uploading files– MVP
+- Social media connection -BACKLOG
+- Distance -BACKLOG
+- OTP -BACKLOG
+- Calendar -BACKLOG
+- Payment platform –BACKLOG
+- Private message and contact – BACKLOG
 
 
 ## Description
