@@ -252,7 +252,7 @@ The url to your repository and to your deployed project
 
 [Deployed App Link]
 
-### Slides
+### Slides 
 
 The url to your presentation slides/wire frames:
 https://www.figma.com/file/Ct8RS0DhspWB4R8swQ0jx7/Project-3-%7C-Click?node-id=0%3A1
