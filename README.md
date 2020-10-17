@@ -210,6 +210,28 @@ REQUESTED SERVICE model
         "7",
         "8",
         "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30",
+        "31",
         ],
         },
      month: { 
@@ -229,7 +251,22 @@ REQUESTED SERVICE model
         "Dec",
         ],
         }
-        
+      year: { 
+     type: Number,
+      enum: [
+        "2020",
+        "2021",
+        ],
+        }       
+     hours: Number,
+      enum: [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        ],
+        }       
   {
     timestamps: {
       createdAt: "created_at",
@@ -243,21 +280,8 @@ ACCEPTED SERVICE model
 
 ```javascript
   {
-    providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
-    requestedOrders: [
-      {
-        userId: {
-          type: mongoose.ObjectId,
-          ref: "User",
-          required: true,
-        },
-        quantity: {
-          type: Number,
-          default: 0,
-        },
-      },
-    ],
-  },
+    requestedserviceId: { type: mongoose.ObjectId, ref: "RequestedService", required: true },
+    totalPrice: type: number,
   {
     timestamps: {
       createdAt: "created_at",
@@ -275,7 +299,7 @@ const{ObjectId}=schema.types.OjectId,
     createdAt: {
         type: Date,
         default: Date.now(),
-        index: {expires: 60*1}
+        index: {expires: 60*1000*60} //One hour
     }
   }
 );
