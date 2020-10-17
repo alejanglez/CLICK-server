@@ -120,7 +120,6 @@ This is an app that connects familily´s children who need support with academic
 
 
 - Feed//UserPrivate
-- Settings//UserPrivate
 - About//Annon
 
 - UserAskForm//UserPrivate
