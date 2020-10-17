@@ -77,7 +77,7 @@ This is an app that connects familily´s children who need support with academic
 - UserSignupPage/annon view
 - ProviderSignupPage/annon view
 
-- FooterBarannon
+- FooterBarAnnon
           </Login>
           </SignupUSer>
           </SignupProvider>
@@ -119,10 +119,11 @@ This is an app that connects familily´s children who need support with academic
                     </SingleRequestedservice>     
 
 
-- UserSearch/feed
-- Settings
+- Feed//UserPrivate
+- Settings//UserPrivate
+- About//Annon
 
-- UserAskForm
+- UserAskForm//UserPrivate
 
 - Review
           </Ratings>
