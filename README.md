@@ -153,13 +153,12 @@ REQUESTED SERVICE model
 
 ```javascript
   {
-    userId: { type: mongoose.ObjectId, ref: "User", required: true },
-    // menuOwnerRef: { type: mongoose.ObjectId, ref: "Cook", required: true },
-    orders: [
+    providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
+    requestedOrders: [
       {
-        menuId: {
+        userId: {
           type: mongoose.ObjectId,
-          ref: "Menu",
+          ref: "User",
           required: true,
         },
         quantity: {
@@ -182,13 +181,12 @@ ACCEPTED SERVICE model
 
 ```javascript
   {
-    userId: { type: mongoose.ObjectId, ref: "User", required: true },
-    // menuOwnerRef: { type: mongoose.ObjectId, ref: "Cook", required: true },
-    orders: [
+    providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
+    requestedOrders: [
       {
-        menuId: {
+        userId: {
           type: mongoose.ObjectId,
-          ref: "Menu",
+          ref: "User",
           required: true,
         },
         quantity: {
@@ -208,13 +206,17 @@ ACCEPTED SERVICE model
 ```
 
 SESSION
- {
-    timestamps: {
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    },
-  }
 
+const{ObjectId}=schema.types.OjectId,
+  {
+    userId: {type:ObjectId, ref:"User"},
+    createdAt: {
+        type: Date,
+        default: Date.now(),
+        index: {expires: 60*1}
+    }
+  }
+);
 
 <br>
 
