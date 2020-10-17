@@ -129,25 +129,65 @@ This is an app that connects familily´s children who need support with academic
 USER model
 
 ```javascript
-{
-  username: {type: String, required: true, unique: true},
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  platform: [platforms]
-  elements: [{type: Schema.Types.ObjectId,ref:'Media'}]
-}
+  {
+    firtName: { type: String, required: true, maxlength: 20 },
+    lastName: { type: String, required: true, maxlength: 20 },
+    email: { type: String, required: true },
+    passwordHash: { type: String, required: true, minlength: 6 },
+    address: { type: String, required: true, maxlength: 30 },
+    serviceDescription: { type: String, maxlength: 100},
+    serviceCat: {
+      type: String,
+      enum: [
+        "academic support",
+        "informatics",
+        "guitar lessons",
+        "piano lessons",
+        "english lessons",
+        "math lessons",
+        "baby sitting",
+        ],
+      required: [true],
+    },
+    imageUrl: String,
+    price: Number,
+  },
+  {
+    timestamps: true,
+  }
+);
 ```
 
 PROVIDER model
 
 ```javascript
-{
-  username: {type: String, required: true, unique: true},
-  email: {type: String, required: true, unique: true},
-  password: {type: String, required: true},
-  platform: [platforms]
-  elements: [{type: Schema.Types.ObjectId,ref:'Media'}]
-}
+  {
+    firtName: { type: String, required: true, maxlength: 20 },
+    lastName: { type: String, required: true, maxlength: 20 },
+    email: { type: String, required: true },
+    passwordHash: { type: String, required: true, minlength: 6 },
+    address: { type: String, required: true, maxlength: 30 },
+    serviceDescription: { type: String, maxlength: 100},
+    serviceCat: {
+      type: String,
+      enum: [
+        "academic support",
+        "informatics",
+        "guitar lessons",
+        "piano lessons",
+        "english lessons",
+        "math lessons",
+        "baby sitting",
+        ],
+      required: [true],
+    },
+    imageUrl: String,
+    price: Number,
+  },
+  {
+    timestamps: true,
+  }
+);
 ```
 
 REQUESTED SERVICE model
