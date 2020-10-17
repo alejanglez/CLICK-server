@@ -70,25 +70,63 @@ This is an app that connects familily´s children who need support with academic
 
 ## Components
 
-- LoginPage
+- LoginPage/annon view
 
-- SignupPage
+- HomePage/annon view
 
-- NavBar
+- UserSignupPage/annon view
+- ProviderSignupPage/annon view
 
-- FooterBar
+- FooterBarannon
+          </Login>
+          </SignupUSer>
+          </SignupProvider>
+          </About>
+ - FooterBarPrivateUSer
+          </Feed>
+          </RequestedService>
+          </Userprofile>
+          </Setting>
+ - FooterBarPrivateProvider
+          </Feed>
+          </RequestedService>
+          </Userprofile>
+          </Setting> 
+          
+- UserProfile
+          </header>
+          </about>
+          </reviews>
+          </Editbutton>
+          </footer>
+- ProviderProfile
+          </header>
+          </about>
+          </aptitudes>
+          </reviews>
+          </Editbutton>
+          </footer>
+- UserProfileEditing
+- ProviderProfileEditing
 
-- BackBar
+- UserRequesedServices
+          <shearchform>
+          </listRequestedservice> 
+                    </SingleRequestedservice> 
+- ProviderRequesedServices
+          <shearchform>
+          </listRequestedservice>
+                    </SingleRequestedservice>     
 
-- ElementList
 
-- SearchForm
+- UserSearch/feed
+- Settings
 
-- SearchResults
+- UserAskForm
 
-- ElementInfo
+- Review
+          </Ratings>
 
-- Stats
 
 ## configs
 
