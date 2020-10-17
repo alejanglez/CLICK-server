@@ -31,17 +31,18 @@ This is an app that connects familily´s children who need support with academic
 -  **User Signup:** As an anon I can sign up in the platform so that I can start creating and managing my profile
 -  **User Login:** As a user I can login to the platform so that I can start creating and managing my profile
 -  **User Logout:** As a user I can logout from the platform so no one else can modify my information
+-  **User Profile CRUD:** As a user I can see and edit my profile.
+-  **Provider Profile CRUD:** As a provider I can see and edit my profile.
 -  **Provider Signup:** As an anon I can sign up in the platform so that I can start creating and managing my profile
 -  **Provider Login:** As a user I can login to the platform so that I can start creating and managing my profile
 -  **Provider Logout:** As a user I can logout from the platform so no one else can modify my information
 -  **User Requested Service** As a user I can request a services to the provider
--  **User Accepted Service** As a user I am able to see accept/decline services that are pending.
--  **User Old Requested Service** As a user I am able to see accept/decline services that are pending.
--  **Provider Requested Service** As a provider I can see a request to the provider
+-  **User Accepted Requested Service** As a user I am able to see accepted services.
+-  **Provider Requested Service** As a provider I can see a request of the user.
 -  **Provider Accepted Service** As a provider I able to accept/decline services that are pending.
--  **Provider Old Service** As a provider I am able to see request that are pending.
--  **User Ratings** As a user/provider I can rate the service or the client
--  **Provider Ratings** As a user/provider I can rate the service or the client
+-  **Provider Accepted Requested Service** As a provider I am able to see accepted services.
+-  **User Ratings** As a user/provider I can rate the service
+-  **Provider Ratings** As a user/provider I can rate the client
 
 <br>
 
@@ -132,7 +133,6 @@ This is an app that connects familily´s children who need support with academic
 
   - Claudinary.config.js
   - Db.config.js
-  - Session.config.js
 
 
 ## Services
