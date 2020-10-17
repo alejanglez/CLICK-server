@@ -135,22 +135,8 @@ USER model
     email: { type: String, required: true },
     passwordHash: { type: String, required: true, minlength: 6 },
     address: { type: String, required: true, maxlength: 30 },
-    serviceDescription: { type: String, maxlength: 100},
-    serviceCat: {
-      type: String,
-      enum: [
-        "academic support",
-        "informatics",
-        "guitar lessons",
-        "piano lessons",
-        "english lessons",
-        "math lessons",
-        "baby sitting",
-        ],
-      required: [true],
-    },
+    about: { type: String, maxlength: 200},
     imageUrl: String,
-    price: Number,
   },
   {
     timestamps: true,
@@ -167,7 +153,8 @@ PROVIDER model
     email: { type: String, required: true },
     passwordHash: { type: String, required: true, minlength: 6 },
     address: { type: String, required: true, maxlength: 30 },
-    serviceDescription: { type: String, maxlength: 100},
+    about: { type: String, maxlength: 200},
+    imageUrl: String,
     serviceCat: {
       type: String,
       enum: [
@@ -181,9 +168,21 @@ PROVIDER model
         ],
       required: [true],
     },
-    imageUrl: String,
-    price: Number,
+    aptitudes: {
+      type: String,
+      enum: [
+        "driving licence",
+        "animal lover",
+        "first aid",
+        "sports",
+        ],
+      required: [true],
+    },
+    rate: { 
+     type: Number,
+     required: [true],
   },
+  facebookUrl: String,
   {
     timestamps: true,
   }
@@ -194,21 +193,43 @@ REQUESTED SERVICE model
 
 ```javascript
   {
+    userId: { type: mongoose.ObjectId, ref: "User", required: true },
     providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
-    requestedOrders: [
-      {
-        userId: {
-          type: mongoose.ObjectId,
-          ref: "User",
-          required: true,
+    quantity: { 
+    type: Number, default: 0,
         },
-        quantity: {
-          type: Number,
-          default: 0,
+    day: { 
+     type: Number,
+      enum: [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        ],
         },
-      },
-    ],
-  },
+     month: { 
+     type: String,
+      enum: [
+        "Jan",
+        "Feb",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "Aug",
+        "Sept",
+        "Oct",
+        "Nov",
+        "Dec",
+        ],
+        }
+        
   {
     timestamps: {
       createdAt: "created_at",
