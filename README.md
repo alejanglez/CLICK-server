@@ -137,10 +137,12 @@ This is an app that connects familily´s children who need support with academic
 
 ## Services
 
-- Auth Service
+- User Auth Service
   - auth.login(user)
   - auth.signup(user)
   - auth.logout(user)
+  
+- Provider Auth Service
   - auth.login(provider)
   - auth.signup(provider)
   - auth.logout(provider)
