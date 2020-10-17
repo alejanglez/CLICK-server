@@ -8,6 +8,7 @@
 - Rating/Comments - MVP
 - Categories/Day filter – MVP
 - Images and uploading files– MVP
+- Notifications only by toggleling icon - MVP
 
 - Dates filter - BACKLOG
 - Show request details - BACKLOG
@@ -16,7 +17,7 @@
 - Calendar - Availability -BACKLOG
 - Payment platform –BACKLOG
 - Private message and contact – BACKLOG
-- Notifications - BACKLOG
+- Notifications by email - BACKLOG
 - OTP - One time password -BACKLOG
 
 
