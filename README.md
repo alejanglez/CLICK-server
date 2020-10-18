@@ -388,11 +388,15 @@ const{ObjectId}=schema.types.OjectId,
 | DELETE      | `User/profile/:id`            |                              | 201            | 400          | delete element                                               |
 | POST        | `/requestedservice/create`    |                              | 204            | 400          | Ask for service                                              |
 | GET         | `/requestedservice`           |                              | 204            | 400          | Ask for service                                                                           
-| GET         | `/requestedservice/list/:id`  |                              | 204            | 400          | Show specific element                                        |
+| GET         | `/requestedservice/:id`       |                              | 204            | 400          | Show specific element                                        |
 | GET         | `/requestedservice/list       |                              | 204            | 400          | Show series elements                                         |
-| POST        | `/acceptedservice/create`    |                              | 204            | 400          | Ask for service                                              |
-| POST        | `/acceptedservice/list/:id`   |                              | 204            | 400          | Show specific element                                        |
+| POST        | `/acceptedservice/create`     |                              | 204            | 400          | Ask for service                                              | 
+| GET        | `/acceptedservice/:id`         |                              | 204            | 400          | Show specific element                                        |
 | GET         | `/acceptedservice/list        |                              | 204            | 400          | Show series elements                                         |
+| POST        | `/review/create`              |                              | 204            | 400          | Ask for service                                              |
+| GET         | `/review/:id`                 |                              | 204            | 400          | Show specific element                                        |
+| GET         | `/review/list`                |                              | 204            | 400          | Show series elements                                         |
+| DELETE      | `/review/:id`                 |                              | 201            | 400          | delete element                                               |
 <br>
 
 
