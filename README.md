@@ -147,12 +147,28 @@ This is an app that connects familily´s children who need support with academic
   - auth.signup(provider)
   - auth.logout(provider)
   
-
-- profile Service
+- User profile Service
+ 
+  - profile.detail(id)
+  - profile.delete(id) - private
+  - profile.update(id) - private
+  
+ - Provider profile Service
+ 
   - profile.filter(type, status) 
   - profile.detail(id)
-  - profile.delete(id)
-  - profile.update(id)
+  - profile.delete(id)- private
+  - profile.update(id)- private
+  
+ - Requested services
+   - RequestedServices.create(type, status) 
+    - RequestedServices.list(id)
+   - RequestedServices.detail(id)
+   
+  - Accepted services
+   - AcceptedServices.create(type, status) 
+   - AcceptedServices.list(id)
+   - AcceptedServices.detail(id)
   
 - External API
   - API for location
@@ -358,18 +374,23 @@ const{ObjectId}=schema.types.OjectId,
 
 | HTTP Method | URL                           | Request Body                 | Success status | Error Status | Description                                                  |
 | ----------- | ---------------------------   | ---------------------------- | -------------- | ------------ | ------------------------------------------------------------ |
-| GET         | `/auth/profile    `           | Saved session                | 200            | 404          | Check if user is logged in and return profile page           |
+| GET         | `/auth/session    `           | Saved session                | 200            | 404          | Check if user is logged in and return profile page           |
 | POST        | `/auth/signup`                | {name, email, password}      | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
 | POST        | `/auth/login`                 | {username, password}         | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session    |
 | POST        | `/auth/logout`                | (empty)                      | 204            | 400          | Logs out the user                                            |
-| GET         | `/profile`                    |                              |                | 400          | Show series elements                                         |
-| GET         | `/profile/:id`                |                              |                |              | Show specific element                                 
-| PUT         | `/profile/:id`                |                              | 200            | 400          | edit element                                                 |
-| DELETE      | `/profile/:id`                |                              | 201            | 400          | delete element                                               |
-| POST        | `/ask`                        |                              | 204            | 400          | Ask for service                                              |
-| GET         | `/ask/succeed`                |                              | 204            | 400          | Succeed                                                      |
+| GET         | `Provider/profile/list`       |                              |                | 400          | Show series elements                                         |
+| GET         | `Provider/profile/:id`        |                              |                |              | Show specific element                                 
+| PUT         | `Provider/profile/:id`        |                              | 200            | 400          | edit element                                                 |
+| DELETE      | `Provider/profile/:id`        |                              | 201            | 400          | delete element                                               |
+| GET         | `User/profile/list`           |                              |                | 400          | Show series elements                                         |
+| GET         | `User/profile/:id`            |                              |                |              | Show specific element                                 
+| PUT         | `User/profile/:id`            |                              | 200            | 400          | edit element                                                 |
+| DELETE      | `User/profile/:id`            |                              | 201            | 400          | delete element                                               |
+| POST        | `/requestedservice/create`    |                              | 204            | 400          | Ask for service                                              |
+| GET         | `/requestedservice`           |                              | 204            | 400          | Ask for service                                                                           
 | GET         | `/requestedservice/list/:id`  |                              | 204            | 400          | Show specific element                                        |
 | GET         | `/requestedservice/list       |                              | 204            | 400          | Show series elements                                         |
+| POST        | `/acceptedservice/create`    |                              | 204            | 400          | Ask for service                                              |
 | POST        | `/acceptedservice/list/:id`   |                              | 204            | 400          | Show specific element                                        |
 | GET         | `/acceptedservice/list        |                              | 204            | 400          | Show series elements                                         |
 <br>
