@@ -194,6 +194,14 @@ PROVIDER model
     passwordHash: { type: String, required: true, minlength: 6 },
     address: { type: String, required: true, maxlength: 30 },
     about: { type: String, maxlength: 200},
+    lessonType:{
+      type: String,
+      enum: [
+      "On line",
+      "face to face",
+        ],
+     required: [true],
+   },
     imageUrl: String,
     serviceCat: {
       type: String,
