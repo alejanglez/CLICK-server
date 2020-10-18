@@ -50,23 +50,28 @@ This is an app that connects familily´s children who need support with academic
 # Client / Frontend
 
 ## React Router Routes (React App)
-| Path                      | Component                      | Permissions | Behavior                                                     |
-| ------------------------- | --------------------           | ----------- | ------------------------------------------------------------ |
-| `/`                       | SplashPage                     | public `<Route>`            | Home page                                        |
-| `/signup`                 | SignupPage                     | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
-| `/login`                  | LoginPage                      | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login  |
-| `/logout`                 | n/a                            | user only `<PrivateRoute>`  | Navigate to homepage after logout, expire session             |
-| `/profile/series`         | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all tv series on backlog                                |
-| `/profile/films`          | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all films on backlog                                    |
-| `/profile/games`          | NavBar, ElementList, FooterBar | user only `<PrivateRoute>`  | Shows all games on backlog                                    |
-| `/search/series`          | SearchForm, SearchResults      | user only  `<PrivateRoute>` | Search a tv series to be added                                |
-| `/search/films`           | SearchForm, SearchResults      | user only `<PrivateRoute>`  | Search a film to be added                                     |
-| `/search/games`           | SearchForm, SearchResults      | user only `<PrivateRoute>`  | Search a game to be added                                     |
-| `/add/:id`                | ElementInfo                    | user only `<PrivateRoute>`  | Add an element to the backlog                                 |
-| `/profile`                | Profile, Stats                 | user only  `<PrivateRoute>` | Check profile with stat information                           |
-| `/done/series`            | Done list for Series           | user only  `<PrivateRoute>` | Shows all tv series finished                                  |
-| `/done/films`             | Done list for films            | user only `<PrivateRoute>`  | Shows all films finished                                      |
-| `/done/games`             | Done list for games            | user only `<PrivateRoute>`  | Shows all videogames finished                                 |
+| Path                           | Component                      | Permissions | Behavior                                                     |
+| -------------------------      | --------------------           | ----------- | ------------------------------------------------------------ |
+| `/`                            | Welcome                        | public `<Route>`            | Home page                                                     |
+| `/user/signup`                 | SignupPage                     | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
+| `/user/login`                  | LoginPage                      | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login  |
+| `/user/logout`                 | LogOut                         | user only `<PrivateRoute>`  | Navigate to homepage after logout, expire session             |
+| `/provider/signup`             | SignupPage                     | anon only  `<AnonRoute>`    | Signup form, link to login, navigate to homepage after signup |
+| `/provider/login`              | LoginPage                      | anon only `<AnonRoute>`     | Login form, link to signup, navigate to homepage after login  |
+| `/provider/logout`             | LogOut                         | provider only `<PrivateRoute>`  | Navigate to homepage after logout, expire session             |
+| `/provider/profile/:id`        | Header, About, Reviews, Edit button, footer  | provider only `<PrivateRoute>`  | Shows single provider profile                  |
+| `/provider/profile/:id/edit`   | Form, footer                   | provider only `<PrivateRoute>`  | Edit provider profile                                |
+| `/provider/requestedservice`   | ElementList, Footer            | provider only `<PrivateRoute>`  | Shows all requested services                                    |
+| `/provider/acceptedservice`    | ElementList, Footer            | provider only `<PrivateRoute>`  | Shows all accepted services                                    |
+| `/user/profile/:id`            | Header, About, Reviews, Edit button, footer | user only `<PrivateRoute>`  | Shows single user profile                       |
+| `/user/profile/:id/edit`       | Form, footer | user only `<PrivateRoute>`  | Edit user profile                                   |
+| `/user/profiles/list-providers`| shearchform, ElementList, Footer  | user only `<PrivateRoute>`  | Shows all profiles from providers                                    |
+| `/user/requestedservice`       |  ElementList, Footer | user only `<PrivateRoute>`  | Shows all requested services                                    |
+| `/user/acceptedservice`        | ElementList, Footer | user only `<PrivateRoute>`  | Shows all accepted services                                    |
+| `/user/requestservice`         | Form, footer      | user only  `<PrivateRoute>` | Show the form to request a sevice                                |
+| `/user/requestservice/success` | Text      | user only  `<PrivateRoute>` | Show success message after requesting                                |
+| `/about`                       | Text                   | public `<Route>`            | About page                                 |
+
           
 
 ## Components
@@ -387,7 +392,7 @@ const{ObjectId}=schema.types.OjectId,
 | PUT         | `User/profile/:id`            |                              | 200            | 400          | edit element                                                 |
 | DELETE      | `User/profile/:id`            |                              | 201            | 400          | delete element                                               |
 | POST        | `/requestedservice/create`    |                              | 204            | 400          | Ask for service                                              |
-| GET         | `/requestedservice`           |                              | 204            | 400          | Ask for service                                                                           
+| GET         | `/requestservice`           |                              | 204            | 400          | Ask for service                                                                           
 | GET         | `/requestedservice/:id`       |                              | 204            | 400          | Show specific element                                        |
 | GET         | `/requestedservice/list       |                              | 204            | 400          | Show series elements                                         |
 | POST        | `/acceptedservice/create`     |                              | 204            | 400          | Ask for service                                              | 
