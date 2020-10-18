@@ -181,176 +181,175 @@ USER model
   {
     timestamps: true,
   }
-);
 ```
 
 PROVIDER model
 
 ```javascript
   {
-    firtName: { type: String, required: true, maxlength: 20 },
-    lastName: { type: String, required: true, maxlength: 20 },
-    email: { type: String, required: true },
-    passwordHash: { type: String, required: true, minlength: 6 },
-    address: { type: String, required: true, maxlength: 30 },
-    about: { type: String, maxlength: 200},
-    lessonType:{
-      type: String,
-      enum: [
-      "On line",
-      "face to face",
-        ],
-     required: [true],
-   },
-    imageUrl: String,
-    serviceCat: {
-      type: String,
-      enum: [
-        "academic support",
-        "informatics",
-        "guitar lessons",
-        "piano lessons",
-        "english lessons",
-        "math lessons",
-        "baby sitting",
-        ],
-      required: [true],
-    },
-    aptitudes: {
-      type: String,
-      enum: [
-        "driving licence",
-        "animal lover",
-        "first aid",
-        "sports",
-        ],
-      required: [true],
-    },
-    rate: { 
-     type: Number,
-     required: [true],
+  firtName: { type: String, required: true, maxlength: 20 },
+  lastName: { type: String, required: true, maxlength: 20 },
+  email: { type: String, required: true },
+  passwordHash: { type: String, required: true, minlength: 6 },
+  address: { type: String, required: true, maxlength: 30 },
+  about: { type: String, maxlength: 200},
+  lessonType:{
+    type: String,
+    enum: [
+    "On line",
+    "face to face",
+      ],
+   required: [true],
+ },
+  imageUrl: String,
+  serviceCat: {
+    type: String,
+    enum: [
+      "academic support",
+      "informatics",
+      "guitar lessons",
+      "piano lessons",
+      "english lessons",
+      "math lessons",
+      "baby sitting",
+      ],
+    required: [true],
   },
-  facebookUrl: String,
-  {
-    timestamps: true,
-  }
-);
+  aptitudes: {
+    type: String,
+    enum: [
+      "driving licence",
+      "animal lover",
+      "first aid",
+      "sports",
+      ],
+    required: [true],
+  },
+  rate: { 
+   type: Number,
+   required: [true],
+},
+facebookUrl: String,
+{
+  timestamps: true,
+}
+}
 ```
 
 REQUESTED SERVICE model
 
 ```javascript
   {
-    userId: { type: mongoose.ObjectId, ref: "User", required: true },
-    providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
-    quantity: { 
-    type: Number, default: 0,
-        },
-    day: { 
-     type: Number,
-      enum: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7",
-        "8",
-        "9",
-        "10",
-        "11",
-        "12",
-        "13",
-        "14",
-        "15",
-        "16",
-        "17",
-        "18",
-        "19",
-        "20",
-        "21",
-        "22",
-        "23",
-        "24",
-        "25",
-        "26",
-        "27",
-        "28",
-        "29",
-        "30",
-        "31",
-        ],
-        },
-     month: { 
-     type: String,
-      enum: [
-        "Jan",
-        "Feb",
-        "March",
-        "April",
-        "May",
-        "June",
-        "July",
-        "Aug",
-        "Sept",
-        "Oct",
-        "Nov",
-        "Dec",
-        ],
-        }
-      year: { 
-     type: Number,
-      enum: [
-        "2020",
-        "2021",
-        ],
-        }       
-     hours: Number,
-      enum: [
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        ],
-        }       
-  {
-    timestamps: {
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    },
-  }
-);
+  userId: { type: mongoose.ObjectId, ref: "User", required: true },
+  providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
+  quantity: { 
+  type: Number, default: 0,
+      },
+  day: { 
+   type: Number,
+    enum: [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      ],
+      },
+   month: { 
+   type: String,
+    enum: [
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sept",
+      "Oct",
+      "Nov",
+      "Dec",
+      ],
+      },
+    year: { 
+   type: Number,
+    enum: [
+      "2020",
+      "2021",
+      ],
+      },       
+   hours: {
+   type: Number,
+    enum: [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      ],
+      },       
+{
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  },
+},
+},
 ```
 
 ACCEPTED SERVICE model
 
 ```javascript
-  {
-    requestedserviceId: { type: mongoose.ObjectId, ref: "RequestedService", required: true },
-    totalPrice: type: number,
-  {
-    timestamps: {
-      createdAt: "created_at",
-      updatedAt: "updated_at",
-    },
-  }
-);
+{
+  requestedserviceId: { type: mongoose.ObjectId, ref: "RequestedService", required: true },
+  totalPrice: type: number,
+{
+  timestamps: {
+    createdAt: "created_at",
+    updatedAt: "updated_at",
+  },
+},
+},
 ```
 
 SESSION
 
 const{ObjectId}=schema.types.OjectId,
-  {
-    userId: {type:ObjectId, ref:"User"},
-    createdAt: {
-        type: Date,
-        default: Date.now(),
-        index: {expires: 60*1000*60} //One hour
-    }
-  }
-);
+{
+  userId: {type:ObjectId, ref:"User"},
+  createdAt: {
+      type: Date,
+      default: Date.now(),
+      index: {expires: 60*1000*60} //One hour
+  },
+},
 
 <br>
 
