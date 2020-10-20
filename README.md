@@ -84,45 +84,45 @@ This is an app that connects familily´s children who need support with academic
 - ProviderSignupPage/annon view
 
 - FooterBarAnnon
-          </Login>
-          </SignupUSer>
-          </SignupProvider>
-          </About>
+  - </Login>
+  - </SignupUSer>
+  - </SignupProvider>
+  - </About>
  - FooterBarPrivateUSer
-          </Feed>
-          </RequestedService>
-          </Userprofile>
-          </Setting>
+  - </Feed>
+  - </RequestedService>
+  - </Userprofile>
+  - </Setting>
  - FooterBarPrivateProvider
-          </Feed>
-          </RequestedService>
-          </Userprofile>
-          </Setting> 
+  - </Feed>
+  - </RequestedService>
+  - </Userprofile>
+  - </Setting> 
           
 - UserProfile
-          </header>
-          </about>
-          </reviews>
-          </Editbutton>
-          </footer>
+  - </header>
+  - </about>
+  - </reviews>
+  - </Editbutton>
+  - </footer>
 - ProviderProfile
-          </header>
-          </about>
-          </aptitudes>
-          </reviews>
-          </Editbutton>
-          </footer>
+  - </header>
+  - </about>
+  - </aptitudes>
+  - </reviews>
+  - </Editbutton>
+  - </footer>
 - UserProfileEditing
 - ProviderProfileEditing
 
 - UserRequesedServices
-          <shearchform>
-          </listRequestedservice> 
-                    </SingleRequestedservice> 
+  - <shearchform>
+  - </listRequestedservice> 
+  - </SingleRequestedservice> 
 - ProviderRequesedServices
-          <shearchform>
-          </listRequestedservice>
-                    </SingleRequestedservice>     
+  - <shearchform>
+          - </listRequestedservice>
+          - </SingleRequestedservice>     
 
 
 - Feed//UserPrivate
@@ -131,7 +131,7 @@ This is an app that connects familily´s children who need support with academic
 - UserAskForm//UserPrivate
 
 - Review
-          </Ratings>
+  - </Ratings>
 
 
 ## configs
