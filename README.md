@@ -84,11 +84,14 @@ This is an app that connects familily´s children who need support with academic
 - ProviderSignupPage/annon view
 
 - FooterBarAnnon
-  - </Login>
-  - </SignupUSer>
-  - </SignupProvider>
-  - </About>
+
+  - ```</Login>```
+  - ```</SignupUSer>```
+  - ```</SignupProvider>```
+  - ```</About>```
+
  - FooterBarPrivateUSer
+ 
   - </Feed>
   - </RequestedService>
   - </Userprofile>
