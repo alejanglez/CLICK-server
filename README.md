@@ -407,9 +407,9 @@ https://trello.com/b/e4Cr0GR6/project-3reactapp-click
 
 The url to your repository and to your deployed project
 
-[Client repository Link]
+[Client repository Link] https://github.com/alejanglez/CLICK-client/
 
-[Server repository Link] https://github.com/alejanglez/CLICK/
+[Server repository Link] https://github.com/alejanglez/CLICK-server/
 
 [Deployed App Link]
 
