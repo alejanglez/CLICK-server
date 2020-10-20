@@ -19,7 +19,6 @@
 - Private message and contact – BACKLOG
 - Notifications by email - BACKLOG
 - OTP - One time password -BACKLOG
-  aa
 
 ## Description
 
