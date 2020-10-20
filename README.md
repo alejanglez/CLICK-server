@@ -1,4 +1,4 @@
-# CLICK
+# CLICK-server
 
 ## Features
 
