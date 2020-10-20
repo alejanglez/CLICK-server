@@ -20,8 +20,6 @@
 - Notifications by email - BACKLOG
 - OTP - One time password -BACKLOG
 
-a
-
 ## Description
 
 This is an app that connects familily´s children who need support with academic services of providers.
