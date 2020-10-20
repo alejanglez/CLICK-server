@@ -385,23 +385,23 @@ const{ObjectId}=schema.types.OjectId,
 | POST        | `/auth/logout`                | (empty)                      | 204            | 400          | Logs out the user                                            |
 | GET         | `Provider/profile/list`       |                              |                | 400          | Show series elements                                         |
 | GET         | `Provider/profile/:id`        |                              |                |              | Show specific element                                 
-| PUT         | `Provider/profile/:id`        |                              | 200            | 400          | edit element                                                 |
+| PUT         | `Provider/profile/:id`        |                              | 200            | 400          | Edit specific element                                                  |
 | DELETE      | `Provider/profile/:id`        |                              | 201            | 400          | delete element                                               |
 | GET         | `User/profile/list`           |                              |                | 400          | Show series elements                                         |
 | GET         | `User/profile/:id`            |                              |                |              | Show specific element                                 
-| PUT         | `User/profile/:id`            |                              | 200            | 400          | edit element                                                 |
+| PUT         | `User/profile/:id`            |                              | 200            | 400          | Edit specific element                                                 |
 | DELETE      | `User/profile/:id`            |                              | 201            | 400          | delete element                                               |
-| POST        | `/requestedservice/create`    |                              | 204            | 400          | Ask for service                                              |
-| GET         | `/requestservice`           |                              | 204            | 400          | Ask for service                                                                           
-| GET         | `/requestedservice/:id`       |                              | 204            | 400          | Show specific element                                        |
-| GET         | `/requestedservice/list       |                              | 204            | 400          | Show series elements                                         |
-| POST        | `/acceptedservice/create`     |                              | 204            | 400          | Ask for service                                              | 
-| GET        | `/acceptedservice/:id`         |                              | 204            | 400          | Show specific element                                        |
-| GET         | `/acceptedservice/list        |                              | 204            | 400          | Show series elements                                         |
-| POST        | `/review/create`              |                              | 204            | 400          | Ask for service                                              |
-| GET         | `/review/:id`                 |                              | 204            | 400          | Show specific element                                        |
-| GET         | `/review/list`                |                              | 204            | 400          | Show series elements                                         |
-| DELETE      | `/review/:id`                 |                              | 201            | 400          | delete element                                               |
+| POST        | `/requestedservice/create`    |                              | 204            | 400          | Ask for service, and create requested service.                                              |
+| GET         | `/requestservice`           |                              | 204            | 400          | Show ask service page                                                                            
+| GET         | `/requestedservice/:id`       |                              | 204            | 400          | Show specific requestedservice                                      |
+| GET         | `/requestedservice/list       |                              | 204            | 400          | Show series requestedservice                                      |
+| POST        | `/acceptedservice/create`     |                              | 204            | 400          | Accept for service, and create requested service.                                              | 
+| GET        | `/acceptedservice/:id`         |                              | 204            | 400          | Show specific acceptedservice                                        |
+| GET         | `/acceptedservice/list        |                              | 204            | 400          | Show series acceptedservice                                         |
+| POST        | `/review/create`              |                              | 204            | 400          | create a review                                              |
+| GET         | `/review/:id`                 |                              | 204            | 400          | Show specific review                                        |
+| GET         | `/review/list`                |                              | 204            | 400          | Show series review                                       |
+| DELETE      | `/review/:id`                 |                              | 201            | 400          | delete review                                                |
 <br>
 
 
