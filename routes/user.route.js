@@ -7,14 +7,15 @@ const saltRounds = 10;
 const User = require("../models/User.model");
 const Session = require("../models/Session.model");
 const mongoose = require("mongoose");
+const fileUploader = require("../config/cloudinary.config");
 
 ////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 // .post() route ==> to process form data
-router.post("/signup", (req, res, next) => {
-  const { username, email, password } = req.body;
+router.post("/signup",fileUploader.single("image"), (req, res, next) => {
+  const { username, email, password, fullname, birthday, zipcode, address, phone,} = req.body;
 
   if (!username || !email || !password) {
     res.status(200).json({
@@ -43,10 +44,12 @@ router.post("/signup", (req, res, next) => {
         // username: username
         username,
         email,
-        // password => this is the key from the User model
-        //     ^
-        //     |            |--> this is placeholder (how we named returning value from the previous method (.hash()))
-        password: hashedPassword,
+        passwordHash: hashedPassword,
+        fullname,
+        birthday,
+        zipcode,
+        address,
+        phone,
       });
     })
     .then((user) => {
