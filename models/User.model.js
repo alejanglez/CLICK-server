@@ -4,29 +4,11 @@ const { Schema, model } = require('mongoose');
 
 const userSchema = new Schema(
   {
-    firtName: { type: String, required: true, maxlength: 20 },
-    lastName: { type: String, required: true, maxlength: 20 },
-    email: { type: String, required: true },
-    passwordHash: { type: String, required: true, minlength: 6 },
-    address: { type: String, required: true, maxlength: 30 },
-    about: { type: String, maxlength: 200},
-    imageUrl: String,
-  },
-  {
-    timestamps: true,
-  }
-  {
-    firtName: {
+    username: {
       type: String,
-      required: [true, 'firtName is required.'],
-      unique: true,
-      maxlength: 20
-    },
-    lastName: {
-      type: String,
-      required: [true, 'firtName is required.'],
-      unique: true,
-      maxlength: 20
+      trim: true,
+      required: [true, 'Username is required.'],
+      unique: true
     },
     email: {
       type: String,
@@ -45,6 +27,7 @@ const userSchema = new Schema(
   {
     timestamps: true
   }
+
 );
 
 module.exports = model('User', userSchema);
