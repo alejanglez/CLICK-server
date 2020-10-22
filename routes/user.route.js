@@ -10,11 +10,20 @@ const mongoose = require("mongoose");
 const fileUploader = require("../config/cloudinary.config");
 
 ////////////////////////////////////////////////////////////////////////
-///////////////////////////// SIGNUP //////////////////////////////////
+///////////////////////////// SIGNUP ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
-
+// const sessionValidate  = (req,res, next ) =>  {
+//   Session.findById(req.body.accessToken)
+//   .then((session) => {
+//     if(session){
+//       next()
+//     }else{
+//       res.json(500).json({errorMessage:"Session"})
+//     }
+//   })
+// }
 // .post() route ==> to process form data
-router.post("/signup",fileUploader.single("image"), (req, res, next) => {
+router.post("/signup", fileUploader.single("image"), (req, res, next) => {
   const {firstName, lastName, email, password, address, about} = req.body;
 
   if (!lastName || !email || !password) {
