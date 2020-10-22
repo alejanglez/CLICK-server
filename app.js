@@ -9,6 +9,7 @@ require("./config/db.config");
 
 //Router definition
 const userRouter = require("./routes/user.route");
+const providerRouter = require("./routes/provider.route");
 
 const app = express();
 
@@ -26,5 +27,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/user", userRouter);
+app.use("/provider", providerRouter);
 
 module.exports = app;

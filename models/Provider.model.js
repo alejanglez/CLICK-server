@@ -1,5 +1,3 @@
-// models/User.model.js
-
 const { Schema, model } = require('mongoose');
 
 const providerSchema = new Schema(
