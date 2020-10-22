@@ -1,12 +1,13 @@
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 require("./config/db.config");
+require('dotenv').config()
 
 //Router definition
 const userRouter = require("./routes/user.route");
-
 const app = express();
 
 //CORS configuration
