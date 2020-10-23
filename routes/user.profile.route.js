@@ -8,7 +8,7 @@ const Session = require("../models/Session.model");
 const mongoose = require("mongoose");
 const fileUploader = require("../config/cloudinary.config");
 
-
+// GET route => to get a list of profiles view
 router.get("/list", (req, res) => {
   User.find()
     .then((userProfiles) => {
@@ -25,10 +25,26 @@ router.get("/list", (req, res) => {
     });
 });
 
+// GET route => to get a specific profile/detailed view
+router.get('/list/:userId', (req, res, next) => {
+  if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
+    res.status(400).json({ message: 'Specified id is not valid' });
+    return;
+  }
+
+  User.findById(req.params.userId)
+    .then(userProfile => {
+      res.status(200).json(userProfile);
+    })
+    .catch(error => {
+      res.json(error);
+    });
+});
+
 
 router.delete("/:userId", (req, res) => {
   const { userId } = req.params;
-  Task.findByIdAndDelete({ _id: userId })
+  User.findByIdAndDelete({ _id: userId })
     .then(() => res.status(200).json({ success: "The user was deleted" }))
     .catch((err) => {
       res
