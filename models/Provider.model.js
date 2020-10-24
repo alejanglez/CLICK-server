@@ -9,7 +9,7 @@ const providerSchema = new Schema(
     passwordHash: { type: String, required: true, minlength: 6 },
     address: { type: String, required: true, maxlength: 30 },
     about: { type: String, required: true, maxlength: 200 },
-    imageUrl: String,
+    imageUrl: { String, default: ""},
     lessonType:{ type: String, enum: [ "Online", "In-person"]},
     serviceCat: { type: String, required: [true],
       enum: [
