@@ -20,7 +20,7 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
   if (!lastName || !email || !password) {
     res.status(200).json({
       errorMessage:
-        "All fields are mandatory. Please provide your first name, last name, email, password, address and about"
+        "All fields are mandatory. Please provide your username, email and password.",
     });
     return;
   }
