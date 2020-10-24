@@ -9,6 +9,9 @@ require("./config/db.config");
 
 //Router definition
 const userRouter = require("./routes/user.route");
+const providerRouter = require("./routes/provider.route");
+const userProfileRouter = require("./routes/user.profile.route");
+
 const app = express();
 
 //CORS configuration
@@ -25,5 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use("/user", userRouter);
+app.use("/provider", providerRouter);
+app.use("/user/profile", userProfileRouter);
 
 module.exports = app;

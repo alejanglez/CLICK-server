@@ -1,5 +1,3 @@
-// models/User.model.js
-
 const { Schema, model } = require('mongoose');
 
 const providerSchema = new Schema(
@@ -12,16 +10,16 @@ const providerSchema = new Schema(
     address: { type: String, required: true, maxlength: 30 },
     about: { type: String, required: true, maxlength: 200 },
     imageUrl: String,
-    lessonType:{ type: String, enum: [ "On line", "face to face"]},
+    lessonType:{ type: String, enum: [ "Online", "In-person"]},
     serviceCat: { type: String, required: [true],
       enum: [
-        "academic support",
-        "informatics",
-        "guitar lessons",
-        "piano lessons",
-        "english lessons",
-        "math lessons",
-        "baby sitting",
+        "Academic Support",
+        "Informatics",
+        "Guitar Lessons",
+        "Piano Lessons",
+        "English Lessons",
+        "Math Lessons",
+        "Baby Sitting",
         ],
     },
     aptitudes: [{

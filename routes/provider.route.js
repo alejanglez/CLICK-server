@@ -4,7 +4,7 @@ const { Router } = require("express");
 const router = new Router();
 const bcryptjs = require("bcryptjs");
 const saltRounds = 10;
-const User = require("../models/User.model");
+const Provider = require("../models/Provider.model");
 const Session = require("../models/Session.model");
 const mongoose = require("mongoose");
 const fileUploader = require("../config/cloudinary.config");
@@ -15,12 +15,12 @@ const fileUploader = require("../config/cloudinary.config");
 
 // .post() route ==> to process form data
 router.post("/signup",fileUploader.single("image"), (req, res, next) => {
-  const {firstName, lastName, email, password, address, about} = req.body;
+  const {firstName, lastName, email, password, address, about, lessonType, serviceCat, aptitudes, rate, facebookUrl, imageUrl} = req.body;
 
   if (!lastName || !email || !password) {
     res.status(200).json({
       errorMessage:
-        "All fields are mandatory. Please provide your username, email and password.",
+        "All fields are mandatory. Please provide your Lastname, email and password.",
     });
     return;
   }
@@ -40,22 +40,27 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
     .genSalt(saltRounds)
     .then((salt) => bcryptjs.hash(password, salt))
     .then((hashedPassword) => {
-      return User.create({
-        // username: username
+      return Provider.create({
         firstName,
         lastName,
         email,
         passwordHash: hashedPassword,
         address,
         about,
+        lessonType,
+        serviceCat,
+        aptitudes,
+        rate,
+        facebookUrl,
+        imageUrl
       });
     })
-    .then((user) => {
+    .then((provider) => {
       Session.create({
-        userId: user._id,
+        providerId: provider._id,
         createdAt: Date.now(),
       }).then((session) => {
-        res.status(200).json({ accessToken: session._id, user });
+        res.status(200).json({ accessToken: session._id, provider });
       });
     })
     .catch((error) => {
@@ -65,7 +70,7 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
         console.log("error", error);
         res.status(200).json({
           errorMessage:
-            "Username and email need to be unique. Either last name or email is already used.",
+            "Lastname and email need to be unique. Either last name or email is already used.",
         });
       } else {
         res.status(500).json({ errorMessage: error });
@@ -88,19 +93,19 @@ router.post("/login", (req, res, next) => {
     return;
   }
 
-  User.findOne({ email })
-    .then((user) => {
-      if (!user) {
+  Provider.findOne({ email })
+    .then((provider) => {
+      if (!provider) {
         res.status(200).json({
           errorMessage: "Email is not registered. Try with other email.",
         });
         return;
-      } else if (bcryptjs.compareSync(password, user.passwordHash)) {
+      } else if (bcryptjs.compareSync(password, provider.passwordHash)) {
         Session.create({
-          userId: user._id,
+          providerId: provider._id,
           createdAt: Date.now(),
         }).then((session) => {
-          res.status(200).json({ accessToken: session._id, user });
+          res.status(200).json({ accessToken: session._id, provider });
         });
       } else {
         res.status(200).json({ errorMessage: "Incorrect password." });
@@ -115,17 +120,17 @@ router.post("/login", (req, res, next) => {
 
 router.post("/logout", (req, res) => {
   Session.deleteOne({
-    userId: req.body.accessToken,
+    providerId: req.body.accessToken,
   })
     .then((session) => {
-      res.status(200).json({ success: "User was logged out" });
+      res.status(200).json({ success: "Provider was logged out" });
     })
     .catch((error) => res.status(500).json({ errorMessage: error }));
 });
 
 router.get("/session/:accessToken", (req, res) => {
   const { accessToken } = req.params;
-  Session.findById({ _id: accessToken }).populate("userId").then((session) => {
+  Session.findById({ _id: accessToken }).populate("providerId").then((session) => {
     if (!session) {
       res.status(200).json({
         errorMessage: "Session does not exist",
