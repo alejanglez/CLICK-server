@@ -15,7 +15,7 @@ const fileUploader = require("../config/cloudinary.config");
 
 // .post() route ==> to process form data
 router.post("/signup",fileUploader.single("image"), (req, res, next) => {
-  const {firstName, lastName, email, password, address, about, lessonType, serviceCat, aptitudes, rate, facebookUrl, } = req.body;
+  const {firstName, lastName, email, password, address, about, lessonType, serviceCat, aptitudes, rate, facebookUrl, imageUrl} = req.body;
 
   if (!lastName || !email || !password) {
     res.status(200).json({
@@ -52,6 +52,7 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
         aptitudes,
         rate,
         facebookUrl,
+        imageUrl
       });
     })
     .then((provider) => {
