@@ -72,4 +72,7 @@ router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
 
 });
 
+
+
+
 module.exports = router;

@@ -5,16 +5,16 @@ const mongoose = require("mongoose");
 const User = require("../models/User.model");
 const Provider = require("../models/Provider.model");
 const Session = require("../models/Session.model");
-const RequestedService = require("../models/RequestedService.model");
+const AcceptedService = require("../models/AcceptedService.model");
 
 
 router.get("/list/:userId", (req, res) => {
     const { userId } = req.params;
     console.log(userId);
-    RequestedService.find({ userId: userId })
-      .then((requestedServiceList) => {
-        if (requestedServiceList.length) {
-          res.status(200).json({ requestedServiceList });
+    AcceptedService.find({ userId: userId })
+      .then((acceptedServiceList) => {
+        if (acceptedServiceList.length) {
+          res.status(200).json({ acceptedServiceList });
         } else {
           res.status(404).json({ errorMessage: "No resquested services were found" });
         }
@@ -30,10 +30,10 @@ router.get("/list/:userId", (req, res) => {
   router.get("/list/:providerId", (req, res) => {
     const { providerId } = req.params;
     console.log(providerId);
-    RequestedService.find({ providerId: providerId })
-      .then((requestedServiceList) => {
-        if (requestedServiceList.length) {
-          res.status(200).json({ requestedServiceList });
+    AcceptedService.find({ providerId: providerId })
+      .then((acceptedServiceList) => {
+        if (acceptedServiceList.length) {
+          res.status(200).json({ acceptedServiceList });
         } else {
           res.status(404).json({ errorMessage: "No resquested services were found" });
         }
@@ -47,20 +47,27 @@ router.get("/list/:userId", (req, res) => {
   });
 
 router.post("/", (req, res) => {
-    const { quantity, userId, providerId  } = req.body;
+    const { userId, providerId, serviceCat, lessonType, rate, totalPrice, quantity } = req.body;
 
     //controlling request data
-    if (!quantity) {
+    if (!quantity || !userId || !providerId ) {
       res.status(500).json({ errorMessage: " quantity is empty" });
       return;
     }
-    RequestedService.create({ 
-        quantity,
+    AcceptedService.create({ 
+      
         userId,
         providerId,
+        quantity,
+        serviceCat,
+        lessonType,
+        rate,
+        totalPrice,
+        quantity
     })
-      .then((requestedService) => {
-        res.status(201).json({ requestedService });
+      .then((acceptedService) => {
+        res.status(201).json({acceptedService });
+        
       })
       .catch((err) => {
         res
@@ -69,20 +76,20 @@ router.post("/", (req, res) => {
       });
   });
 
-  router.get("/:requestedServiceId", (req, res) => {
-    const { requestedServiceId } = req.params;
-    console.log(requestedServiceId);
+  router.get("/:acceptedServiceId", (req, res) => {
+    const { acceptedServiceId } = req.params;
+    console.log(acceptedServiceId);
   
-    RequestedService.findById(requestedServiceId)
+    AcceptedService.findById(acceptedServiceId)
       .populate("userId")
       .populate("providerId")
       
-      .then((foundRequestedService) => {
-        res.status(201).json({ foundRequestedService });
+      .then((foundacceptedService) => {
+        res.status(201).json({ foundacceptedService });
       })
   
       .catch((err) =>
-        console.log(`Err while getting a single requested service from the  DB: ${err}`)
+        console.log(`Err while getting a single accepted service from the  DB: ${err}`)
       );
   });
 
