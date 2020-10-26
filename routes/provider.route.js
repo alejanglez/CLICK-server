@@ -52,7 +52,7 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
         aptitudes,
         rate,
         facebookUrl,
-        imageUrl: req.file.path,
+        // imageUrl: req.file.path,
       });
     })
     .then((provider) => {
