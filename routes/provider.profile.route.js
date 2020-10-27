@@ -10,6 +10,12 @@ const fileUploader = require("../config/cloudinary.config");
 
 // GET route => to get a list of profiles view
 router.get("/list", (req, res) => {
+
+// let values = [2, 56, 3, 41, 0, 4, 100, 23];
+// let sum = values.reduce((previous, current) => current += previous);
+// let avg = sum / values.length;
+
+
   Provider.find()
     .then((providerProfiles) => {
       if (providerProfiles.length) {

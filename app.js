@@ -11,8 +11,10 @@ require("./config/db.config");
 const userRouter = require("./routes/user.route");
 const providerRouter = require("./routes/provider.route");
 const userProfileRouter = require("./routes/user.profile.route");
+const providerProfileRouter = require("./routes/provider.profile.route");
 const requestedServiceRouter = require("./routes/requestedService.route");
 const acceptedServiceRouter = require("./routes/acceptedService.route");
+const postRouter = require("./routes/post.routes");
 
 const app = express();
 
@@ -32,7 +34,9 @@ app.use(cookieParser());
 app.use("/user", userRouter);
 app.use("/provider", providerRouter);
 app.use("/user/profile", userProfileRouter);
+app.use("/provider/profile", providerProfileRouter);
 app.use("/requested", requestedServiceRouter);
 app.use("/accepted", acceptedServiceRouter);
+app.use("/post", postRouter);
 
 module.exports = app;

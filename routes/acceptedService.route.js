@@ -10,6 +10,7 @@ const AcceptedService = require("../models/AcceptedService.model");
 
 router.get("/list/:userId", (req, res) => {
     const { userId } = req.params;
+
     console.log(userId);
     AcceptedService.find({ userId: userId })
       .then((acceptedServiceList) => {
@@ -81,8 +82,8 @@ router.post("/", (req, res) => {
     console.log(acceptedServiceId);
   
     AcceptedService.findById(acceptedServiceId)
-      .populate("userId")
-      .populate("providerId")
+    .populate("requestedserviceId")
+      
       
       .then((foundacceptedService) => {
         res.status(201).json({ foundacceptedService });
