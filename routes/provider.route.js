@@ -14,8 +14,20 @@ const fileUploader = require("../config/cloudinary.config");
 ////////////////////////////////////////////////////////////////////////
 
 // .post() route ==> to process form data
-router.post("/signup",fileUploader.single("image"), (req, res, next) => {
-  const {firstName, lastName, email, password, address, about, lessonType, serviceCat, aptitudes, rate, facebookUrl} = req.body;
+router.post("/signup", fileUploader.single("image"), (req, res, next) => {
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    address,
+    about,
+    lessonType,
+    serviceCat,
+    aptitudes,
+    rate,
+    facebookUrl,
+  } = req.body;
 
   if (!lastName || !email || !password) {
     res.status(200).json({
@@ -55,12 +67,12 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
         // imageUrl: req.file.path,
       });
     })
-    .then((provider) => {
+    .then((profileInformation) => {
       Session.create({
-        providerId: provider._id,
+        providerId: profileInformation._id,
         createdAt: Date.now(),
       }).then((session) => {
-        res.status(200).json({ accessToken: session._id, provider });
+        res.status(200).json({ accessToken: session._id, profileInformation });
       });
     })
     .catch((error) => {
@@ -94,18 +106,22 @@ router.post("/login", (req, res, next) => {
   }
 
   Provider.findOne({ email })
-    .then((provider) => {
-      if (!provider) {
+    .then((profileInformation) => {
+      if (!profileInformation) {
         res.status(200).json({
           errorMessage: "Email is not registered. Try with other email.",
         });
         return;
-      } else if (bcryptjs.compareSync(password, provider.passwordHash)) {
+      } else if (
+        bcryptjs.compareSync(password, profileInformation.passwordHash)
+      ) {
         Session.create({
-          providerId: provider._id,
+          providerId: profileInformation._id,
           createdAt: Date.now(),
         }).then((session) => {
-          res.status(200).json({ accessToken: session._id, provider });
+          res
+            .status(200)
+            .json({ accessToken: session._id, profileInformation });
         });
       } else {
         res.status(200).json({ errorMessage: "Incorrect password." });
@@ -130,18 +146,20 @@ router.post("/logout", (req, res) => {
 
 router.get("/session/:accessToken", (req, res) => {
   const { accessToken } = req.params;
-  Session.findById({ _id: accessToken }).populate("providerId").then((session) => {
-    if (!session) {
-      res.status(200).json({
-        errorMessage: "Session does not exist",
-      });
-    } else {
-      res.status(200).json({
-        session
-      });
-    }
-  })
-  .catch(err => res.status(500).json({errorMessage: err}))
+  Session.findById({ _id: accessToken })
+    .populate("providerId")
+    .then((session) => {
+      if (!session) {
+        res.status(200).json({
+          errorMessage: "Session does not exist",
+        });
+      } else {
+        res.status(200).json({
+          session,
+        });
+      }
+    })
+    .catch((err) => res.status(500).json({ errorMessage: err }));
 });
 
 module.exports = router;

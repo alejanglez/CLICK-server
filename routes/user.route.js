@@ -24,12 +24,12 @@ const fileUploader = require("../config/cloudinary.config");
 // }
 // .post() route ==> to process form data
 router.post("/signup", fileUploader.single("image"), (req, res, next) => {
-  const {firstName, lastName, email, password, address, about} = req.body;
+  const { firstName, lastName, email, password, address, about } = req.body;
 
   if (!lastName || !email || !password) {
     res.status(200).json({
       errorMessage:
-        "All fields are mandatory. Please provide your first name, last name, email, password, address and about"
+        "All fields are mandatory. Please provide your first name, last name, email, password, address and about",
     });
     return;
   }
@@ -60,12 +60,12 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
         // imageUrl: req.file.path,
       });
     })
-    .then((user) => {
+    .then((profileInformation) => {
       Session.create({
-        userId: user._id,
+        userId: profileInformation._id,
         createdAt: Date.now(),
       }).then((session) => {
-        res.status(200).json({ accessToken: session._id, user });
+        res.status(200).json({ accessToken: session._id, profileInformation });
       });
     })
     .catch((error) => {
@@ -99,18 +99,22 @@ router.post("/login", (req, res, next) => {
   }
 
   User.findOne({ email })
-    .then((user) => {
-      if (!user) {
+    .then((profileInformation) => {
+      if (!profileInformation) {
         res.status(200).json({
           errorMessage: "Email is not registered. Try with other email.",
         });
         return;
-      } else if (bcryptjs.compareSync(password, user.passwordHash)) {
+      } else if (
+        bcryptjs.compareSync(password, profileInformation.passwordHash)
+      ) {
         Session.create({
-          userId: user._id,
+          userId: profileInformation._id,
           createdAt: Date.now(),
         }).then((session) => {
-          res.status(200).json({ accessToken: session._id, user });
+          res
+            .status(200)
+            .json({ accessToken: session._id, profileInformation });
         });
       } else {
         res.status(200).json({ errorMessage: "Incorrect password." });
@@ -135,20 +139,20 @@ router.post("/logout", (req, res) => {
 
 router.get("/session/:accessToken", (req, res) => {
   const { accessToken } = req.params;
-  Session.findById({ _id: accessToken }).populate("userId").then((session) => {
-    if (!session) {
-      res.status(200).json({
-        errorMessage: "Session does not exist",
-      });
-    } else {
-      res.status(200).json({
-        session
-      });
-    }
-  })
-  .catch(err => res.status(500).json({errorMessage: err}))
+  Session.findById({ _id: accessToken })
+    .populate("userId")
+    .then((session) => {
+      if (!session) {
+        res.status(200).json({
+          errorMessage: "Session does not exist",
+        });
+      } else {
+        res.status(200).json({
+          session,
+        });
+      }
+    })
+    .catch((err) => res.status(500).json({ errorMessage: err }));
 });
-
-
 
 module.exports = router;

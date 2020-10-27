@@ -1,7 +1,6 @@
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const providerSchema = new Schema(
-
   {
     firstName: { type: String, required: true, maxlength: 20 },
     lastName: { type: String, required: true, maxlength: 20 },
@@ -9,9 +8,11 @@ const providerSchema = new Schema(
     passwordHash: { type: String, required: true, minlength: 6 },
     address: { type: String, required: true, maxlength: 30 },
     about: { type: String, required: true, maxlength: 200 },
-    imageUrl: { String, default: ""},
-    lessonType:{ type: String, enum: [ "Online", "In-person"]},
-    serviceCat: { type: String, required: [true],
+    imageUrl: { String, default: "" },
+    lessonType: { type: String, enum: ["Online", "In-person"] },
+    serviceCat: {
+      type: String,
+      required: [true],
       enum: [
         "Academic Support",
         "Informatics",
@@ -20,28 +21,25 @@ const providerSchema = new Schema(
         "English Lessons",
         "Math Lessons",
         "Baby Sitting",
-        ],
-    },
-    aptitudes: [{
-    type: String,
-    enum: [
-      "driving licence",
-      "animal lover",
-      "first aid",
-      "sports",
       ],
-    }],
+    },
+    aptitudes: [
+      {
+        type: String,
+        enum: ["driving licence", "animal lover", "first aid", "sports"],
+      },
+    ],
     rate: {
-    type: Number,
-    default: 0,
+      type: Number,
+      default: 0,
     },
     facebookUrl: {
-    type: String,
+      type: String,
     },
   },
-    {
-    timestamps: true
-    },
+  {
+    timestamps: true,
+  }
 );
 
-module.exports = model('Provider', providerSchema);
+module.exports = model("Provider", providerSchema);
