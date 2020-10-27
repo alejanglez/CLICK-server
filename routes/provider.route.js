@@ -55,12 +55,12 @@ router.post("/signup",fileUploader.single("image"), (req, res, next) => {
         // imageUrl: req.file.path,
       });
     })
-    .then((provider) => {
+    .then((profileInformation) => {
       Session.create({
-        providerId: provider._id,
+        providerId: profileInformation._id,
         createdAt: Date.now(),
       }).then((session) => {
-        res.status(200).json({ accessToken: session._id, provider });
+        res.status(200).json({ accessToken: session._id, profileInformation });
       });
     })
     .catch((error) => {
