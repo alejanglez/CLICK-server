@@ -12,6 +12,7 @@ router.get("/list/:userId", (req, res) => {
     const { userId } = req.params;
     console.log(userId);
     RequestedService.find({ userId: userId })
+    .populate("providerId") //check if its working
       .then((requestedServiceList) => {
         if (requestedServiceList.length) {
           res.status(200).json({ requestedServiceList });
@@ -31,6 +32,7 @@ router.get("/list/:userId", (req, res) => {
     const { providerId } = req.params;
     console.log(providerId);
     RequestedService.find({ providerId: providerId })
+    .populate("userId") //check if its working
       .then((requestedServiceList) => {
         if (requestedServiceList.length) {
           res.status(200).json({ requestedServiceList });

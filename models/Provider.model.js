@@ -33,7 +33,7 @@ const providerSchema = new Schema(
     }],
     rate: {
     type: Number,
-    required: true,
+    default: 0,
     },
     facebookUrl: {
     type: String,
