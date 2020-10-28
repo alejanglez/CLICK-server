@@ -57,7 +57,6 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
         passwordHash: hashedPassword,
         address,
         about,
-        role,
         // imageUrl: req.file.path,
       });
     })
@@ -79,7 +78,7 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
             "Username and email need to be unique. Either last name or email is already used.",
         });
       } else {
-        res.status(500).json({ errorMessage: error });
+        res.status(500).json({ errorMessage: `error create sess ${error}` });
       }
     }); // close .catch()
 });

@@ -1,6 +1,6 @@
 // models/User.model.js
 
-const { Schema, model } = require('mongoose');
+const { Schema, model } = require("mongoose");
 
 const userSchema = new Schema(
   {
@@ -10,13 +10,12 @@ const userSchema = new Schema(
     passwordHash: { type: String, required: true, minlength: 6 },
     address: { type: String, required: true, maxlength: 30 },
     about: { type: String, required: true, maxlength: 200 },
-    imageUrl: { String, default: ""},
-    role: {type: String, default:"user"}
+    imageUrl: { type: String, default: "" },
+    role: { type: String, default: "user" },
   },
   {
-    timestamps: true
-  },
-
+    timestamps: true,
+  }
 );
 
-module.exports = model('User', userSchema);
+module.exports = model("User", userSchema);
