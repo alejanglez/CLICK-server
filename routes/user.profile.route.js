@@ -1,4 +1,3 @@
-
 const { Router } = require("express");
 const router = new Router();
 const bcryptjs = require("bcryptjs");
@@ -26,21 +25,20 @@ router.get("/list", (req, res) => {
 });
 
 // GET route => to get a specific profile/detailed view
-router.get('/list/:userId', (req, res, next) => {
+router.get("/list/:userId", (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.userId)) {
-    res.status(400).json({ message: 'Specified id is not valid' });
+    res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
   User.findById(req.params.userId)
-    .then(userProfile => {
+    .then((userProfile) => {
       res.status(200).json(userProfile);
     })
-    .catch(error => {
+    .catch((error) => {
       res.json(error);
     });
 });
-
 
 router.delete("/:userId", (req, res) => {
   const { userId } = req.params;
@@ -54,22 +52,27 @@ router.delete("/:userId", (req, res) => {
 });
 
 router.put("/:userId/edit", fileUploader.single("image"), (req, res) => {
-    const {userId} = req.params;
-    const {firstName, lastName, email, password, address, about} = req.body;
-    let imageUrl;
-    if (req.file) {
-      imageUrl = req.file.path;
-    } else {
-      imageUrl = req.body.existingImage;
-    }
-    User.findByIdAndUpdate({_id: userId},{firstName, lastName, email, password, address, about},{new: true})
-    .then((user) => res.status(200).json({ success: "The user was updated" , user}))
+  const { userId } = req.params;
+  const { firstName, lastName, email, password, address, about } = req.body;
+  let imageUrl;
+  if (req.file) {
+    imageUrl = req.file.path;
+  } else {
+    imageUrl = req.body.existingImage;
+  }
+  User.findByIdAndUpdate(
+    { _id: userId },
+    { firstName, lastName, email, password, address, about },
+    { new: true }
+  )
+    .then((user) =>
+      res.status(200).json({ success: "The user was updated", user })
+    )
     .catch((err) => {
       res
         .status(500)
         .json({ errorMessage: "Internal error", errorDetail: err });
     });
-
 });
 
 module.exports = router;
