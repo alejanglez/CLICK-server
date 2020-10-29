@@ -10,6 +10,15 @@ const mongoose = require("mongoose");
 const fileUploader = require("../config/cloudinary.config");
 
 ////////////////////////////////////////////////////////////////////////
+///////////////////////////// UPLOAD IMAGE /////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+router.post("/image", fileUploader.single("image"), (req, res) => {
+  console.log(req.file);
+  res.json(req.file.path);
+});
+
+////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP ///////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 // const sessionValidate  = (req,res, next ) =>  {
@@ -24,7 +33,15 @@ const fileUploader = require("../config/cloudinary.config");
 // }
 // .post() route ==> to process form data
 router.post("/signup", fileUploader.single("image"), (req, res, next) => {
-  const { firstName, lastName, email, password, address, about } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    address,
+    about,
+    imageUrl,
+  } = req.body;
 
   if (!lastName || !email || !password) {
     res.status(200).json({
@@ -57,8 +74,7 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
         passwordHash: hashedPassword,
         address,
         about,
-        role,
-        // imageUrl: req.file.path,
+        imageUrl,
       });
     })
     .then((profileInformation) => {
@@ -79,7 +95,7 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
             "Username and email need to be unique. Either last name or email is already used.",
         });
       } else {
-        res.status(500).json({ errorMessage: error });
+        res.status(500).json({ errorMessage: `error create sess ${error}` });
       }
     }); // close .catch()
 });
