@@ -10,11 +10,20 @@ const mongoose = require("mongoose");
 const fileUploader = require("../config/cloudinary.config");
 
 ////////////////////////////////////////////////////////////////////////
+///////////////////////////// UPLOAD IMAGE /////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+router.post("/image", fileUploader.single("image"), (req, res) => {
+  console.log(req.file);
+  res.json(req.file.path);
+});
+
+////////////////////////////////////////////////////////////////////////
 ///////////////////////////// SIGNUP //////////////////////////////////
 ////////////////////////////////////////////////////////////////////////
 
 // .post() route ==> to process form data
-router.post("/signup", fileUploader.single("image"), (req, res, next) => {
+router.post("/signup", (req, res, next) => {
   const {
     firstName,
     lastName,
@@ -22,6 +31,7 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
     password,
     address,
     about,
+    imageUrl,
     lessonType,
     serviceCat,
     aptitudes,
@@ -64,7 +74,7 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
         aptitudes,
         rate,
         facebookUrl,
-        // imageUrl: req.file.path,
+        imageUrl,
       });
     })
     .then((profileInformation) => {
