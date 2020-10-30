@@ -40,7 +40,7 @@ const providerSchema = new Schema(
     facebookUrl: {
       type: String,
     },
-    role: { type: String, default: "provider" },
+    // role: { type: String, default: "provider" },
   },
   {
     timestamps: true,

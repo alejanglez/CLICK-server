@@ -1,11 +1,9 @@
-
 require("dotenv").config();
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 require("./config/db.config");
-
 
 //Router definition
 const userRouter = require("./routes/user.route");
@@ -35,6 +33,7 @@ app.use("/user", userRouter);
 app.use("/provider", providerRouter);
 app.use("/user/profile", userProfileRouter);
 app.use("/provider/profile", providerProfileRouter);
+
 app.use("/requested", requestedServiceRouter);
 app.use("/accepted", acceptedServiceRouter);
 app.use("/post", postRouter);
