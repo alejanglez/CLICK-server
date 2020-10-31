@@ -1,4 +1,3 @@
-
 const { Router } = require("express");
 const router = new Router();
 const bcryptjs = require("bcryptjs");
@@ -10,11 +9,9 @@ const fileUploader = require("../config/cloudinary.config");
 
 // GET route => to get a list of profiles view
 router.get("/list", (req, res) => {
-
-// let values = [2, 56, 3, 41, 0, 4, 100, 23];
-// let sum = values.reduce((previous, current) => current += previous);
-// let avg = sum / values.length;
-
+  // let values = [];
+  // let sum = values.reduce((previous, current) => current += previous);
+  // let avg = sum / values.length;
 
   Provider.find()
     .then((providerProfiles) => {
@@ -32,21 +29,20 @@ router.get("/list", (req, res) => {
 });
 
 // GET route => to get a specific profile/detailed view
-router.get('/list/:providerId', (req, res, next) => {
+router.get("/list/:providerId", (req, res, next) => {
   if (!mongoose.Types.ObjectId.isValid(req.params.providerId)) {
-    res.status(400).json({ message: 'Specified id is not valid' });
+    res.status(400).json({ message: "Specified id is not valid" });
     return;
   }
 
   User.findById(req.params.providerId)
-    .then(providerProfile => {
+    .then((providerProfile) => {
       res.status(200).json(providerProfile);
     })
-    .catch(error => {
+    .catch((error) => {
       res.json(error);
     });
 });
-
 
 router.delete("/:providerId", (req, res) => {
   const { providerId } = req.params;
@@ -60,25 +56,27 @@ router.delete("/:providerId", (req, res) => {
 });
 
 router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
-    const {providerId} = req.params;
-    const {firstName, lastName, email, password, address, about} = req.body;
-    let imageUrl;
-    if (req.file) {
-      imageUrl = req.file.path;
-    } else {
-      imageUrl = req.body.existingImage;
-    }
-    User.findByIdAndUpdate({_id: providerId},{firstName, lastName, email, password, address, about},{new: true})
-    .then((user) => res.status(200).json({ success: "The user was updated" , user}))
+  const { providerId } = req.params;
+  const { firstName, lastName, email, password, address, about } = req.body;
+  let imageUrl;
+  if (req.file) {
+    imageUrl = req.file.path;
+  } else {
+    imageUrl = req.body.existingImage;
+  }
+  User.findByIdAndUpdate(
+    { _id: providerId },
+    { firstName, lastName, email, password, address, about },
+    { new: true }
+  )
+    .then((user) =>
+      res.status(200).json({ success: "The user was updated", user })
+    )
     .catch((err) => {
       res
         .status(500)
         .json({ errorMessage: "Internal error", errorDetail: err });
     });
-
 });
-
-
-
 
 module.exports = router;
