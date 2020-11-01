@@ -46,7 +46,7 @@ router.get("/list/:providerId", (req, res, next) => {
 
 router.delete("/:providerId", (req, res) => {
   const { providerId } = req.params;
-  Provider.findByIdAndDelete({ _id: providerId })
+  User.findByIdAndDelete({ _id: providerId })
     .then(() => res.status(200).json({ success: "The user was deleted" }))
     .catch((err) => {
       res
@@ -64,13 +64,13 @@ router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
   } else {
     imageUrl = req.body.existingImage;
   }
-  Provider.findByIdAndUpdate(
+  User.findByIdAndUpdate(
     { _id: providerId },
     { firstName, lastName, email, password, address, about },
     { new: true }
   )
-    .then((provider) =>
-      res.status(200).json({ success: "The user was updated", provider })
+    .then((user) =>
+      res.status(200).json({ success: "The user was updated", user })
     )
     .catch((err) => {
       res
@@ -91,25 +91,25 @@ router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
 //     });
 // });
 
-router.get("/list/hello", (req, res) => {
+router.get("/list/:Search", (req, res) => {
   console.log(`SEARCH PARAMS`, req.params);
   console.log(`SEARCH serviceCat`, req.params.serviceCat);
   const searchParams = req.params.Search;
 
   Provider
-    //   // get ALL occurrences (g), be case insensitive (i)
+    // get ALL occurrences (g), be case insensitive (i)
     .find({
-      //     $or: [
-      //       { serviceCat: RegExp(`\\b${searchParams}`, "gi") },
-      //       { lessonType: RegExp(`\\b${searchParams}`, "gi") },
-      //     ],
-      //   })
-      //   // .find({
-      //   //   $or: [
-      //   //     { serviceCat: { $regex: `${searchParams}` } },
-      //   //     { lessonType: { $regex: `${searchParams}` } },
-      //   //   ],
+      $or: [
+        { serviceCat: RegExp(`\\b${searchParams}`, "gi") },
+        { lessonType: RegExp(`\\b${searchParams}`, "gi") },
+      ],
     })
+    // .find({
+    //   $or: [
+    //     { serviceCat: { $regex: `${searchParams}` } },
+    //     { lessonType: { $regex: `${searchParams}` } },
+    //   ],
+    // })
     .then((providerResults) => {
       console.log(`SEARCH RESULTS FROM DB`, providerResults);
       res.status(200).json(providerResults);

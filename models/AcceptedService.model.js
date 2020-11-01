@@ -30,6 +30,16 @@ const acceptedServiceSchema = new Schema(
     userLastName: { type: String, required: true, maxlength: 20 },
     providerFirstName: { type: String, required: true, maxlength: 20 },
     providerLastName: { type: String, required: true, maxlength: 20 },
+    userimageUrl: {
+      type: String,
+      default:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    },
+    providerimageUrl: {
+      type: String,
+      default:
+        "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460__480.png",
+    },
   },
   {
     timestamps: true,
