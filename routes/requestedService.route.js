@@ -6,7 +6,7 @@ const Provider = require("../models/Provider.model");
 const Session = require("../models/Session.model");
 const RequestedService = require("../models/RequestedService.model");
 
-router.get("/list/:userId", (req, res) => {
+router.get("/user/list/:userId", (req, res) => {
   const { userId } = req.params;
   console.log(userId);
   RequestedService.find({ userId: userId })
@@ -29,19 +29,19 @@ router.get("/list/:userId", (req, res) => {
     });
 });
 
-router.get("/list/:providerId", (req, res) => {
+router.get("/provider/list/:providerId", (req, res) => {
   const { providerId } = req.params;
   console.log(providerId);
   RequestedService.find({ providerId: providerId })
     .populate("userId") //check if its working
     .populate("providerId") //check if its working
-    .then((requestedServiceList) => {
-      if (requestedServiceList.length) {
-        res.status(200).json({ requestedServiceList });
+    .then((requestedServiceList2) => {
+      if (requestedServiceList2.length) {
+        res.status(200).json({ requestedServiceList2 });
       } else {
         res
           .status(404)
-          .json({ errorMessage: "No resquested services were found" });
+          .json({ errorMessage: "No resquested services were foundwwwww" });
       }
     })
     .catch((err) => {
