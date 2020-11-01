@@ -18,7 +18,9 @@ router.get("/list", (req, res) => {
       if (providerProfiles.length) {
         res.status(200).json({ providerProfiles });
       } else {
-        res.status(404).json({ errorMessage: "No user profiles were found" });
+        res
+          .status(404)
+          .json({ errorMessage: "No provider profiles were found" });
       }
     })
     .catch((err) => {
@@ -46,8 +48,8 @@ router.get("/list/:providerId", (req, res, next) => {
 
 router.delete("/:providerId", (req, res) => {
   const { providerId } = req.params;
-  User.findByIdAndDelete({ _id: providerId })
-    .then(() => res.status(200).json({ success: "The user was deleted" }))
+  Provider.findByIdAndDelete({ _id: providerId })
+    .then(() => res.status(200).json({ success: "The provider was deleted" }))
     .catch((err) => {
       res
         .status(500)
@@ -64,13 +66,13 @@ router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
   } else {
     imageUrl = req.body.existingImage;
   }
-  User.findByIdAndUpdate(
+  Provider.findByIdAndUpdate(
     { _id: providerId },
     { firstName, lastName, email, password, address, about },
     { new: true }
   )
-    .then((user) =>
-      res.status(200).json({ success: "The user was updated", user })
+    .then((provider) =>
+      res.status(200).json({ success: "The provider was updated", provider })
     )
     .catch((err) => {
       res
