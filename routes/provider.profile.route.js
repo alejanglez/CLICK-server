@@ -46,7 +46,7 @@ router.get("/list/:providerId", (req, res, next) => {
 
 router.delete("/:providerId", (req, res) => {
   const { providerId } = req.params;
-  User.findByIdAndDelete({ _id: providerId })
+  Provider.findByIdAndDelete({ _id: providerId })
     .then(() => res.status(200).json({ success: "The user was deleted" }))
     .catch((err) => {
       res
@@ -64,13 +64,13 @@ router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
   } else {
     imageUrl = req.body.existingImage;
   }
-  User.findByIdAndUpdate(
+  Provider.findByIdAndUpdate(
     { _id: providerId },
     { firstName, lastName, email, password, address, about },
     { new: true }
   )
-    .then((user) =>
-      res.status(200).json({ success: "The user was updated", user })
+    .then((provider) =>
+      res.status(200).json({ success: "The user was updated", provider })
     )
     .catch((err) => {
       res
