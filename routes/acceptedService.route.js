@@ -28,7 +28,7 @@ router.get("/user/list/:userId", (req, res) => {
     });
 });
 
-router.get("/user/list/:providerId", (req, res) => {
+router.get("/provider/list/:providerId", (req, res) => {
   const { providerId } = req.params;
   console.log(providerId);
   AcceptedService.find({ providerId: providerId })
@@ -72,19 +72,18 @@ router.post("/", (req, res) => {
     return;
   }
   AcceptedService.create({
-    userId,
-    providerId,
     quantity,
+    requestedServiceId,
     serviceCat,
     lessonType,
     rate,
+    firstNameProvider,
+    lastNameProvider,
+    imageUrlProvider,
+    firstNameUser,
+    lastNameUser,
+    imageUrlUser,
     totalPrice,
-    userFirstName,
-    userLasttName,
-    providerFirstName,
-    providerLastName,
-    userimageUrl,
-    providerimageUrl,
   })
     .then((acceptedService) => {
       res.status(201).json({ acceptedService });
