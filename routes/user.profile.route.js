@@ -7,6 +7,15 @@ const Session = require("../models/Session.model");
 const mongoose = require("mongoose");
 const fileUploader = require("../config/cloudinary.config");
 
+////////////////////////////////////////////////////////////////////////
+///////////////////////////// UPLOAD IMAGE /////////////////////////////
+////////////////////////////////////////////////////////////////////////
+
+router.post("/image", fileUploader.single("image"), (req, res) => {
+  console.log(req.file);
+  res.json(req.file.path);
+});
+
 // GET route => to get a list of profiles view
 router.get("/list", (req, res) => {
   User.find()
@@ -53,16 +62,26 @@ router.delete("/:userId", (req, res) => {
 
 router.put("/:userId/edit", fileUploader.single("image"), (req, res) => {
   const { userId } = req.params;
-  const { firstName, lastName, email, password, address, about } = req.body;
-  let imageUrl;
-  if (req.file) {
-    imageUrl = req.file.path;
-  } else {
-    imageUrl = req.body.existingImage;
-  }
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    address,
+    about,
+    imageUrl,
+  } = req.body;
+
+  // let imageUrl;
+  // if (req.file) {
+  //   imageUrl = req.file.path;
+  // } else {
+  //   imageUrl = req.body.existingImage;
+  // }
+
   User.findByIdAndUpdate(
     { _id: userId },
-    { firstName, lastName, email, password, address, about },
+    { firstName, lastName, email, password, address, about, imageUrl },
     { new: true }
   )
     .then((user) =>
