@@ -52,7 +52,8 @@ router.get("/provider/list/:providerId", (req, res) => {
 router.post("/", (req, res) => {
   const {
     userId,
-    providerId,
+    prividerId,
+    requestedServiceId,
     serviceCat,
     lessonType,
     rate,
@@ -67,23 +68,25 @@ router.post("/", (req, res) => {
   } = req.body;
 
   //controlling request data
-  if (!quantity || !userId || !providerId) {
+  if (!quantity || !requestedServiceId) {
     res.status(500).json({ errorMessage: " quantity is empty" });
     return;
   }
   AcceptedService.create({
-    quantity,
+    userId,
+    prividerId,
     requestedServiceId,
     serviceCat,
     lessonType,
     rate,
-    firstNameProvider,
-    lastNameProvider,
-    imageUrlProvider,
-    firstNameUser,
-    lastNameUser,
-    imageUrlUser,
     totalPrice,
+    quantity,
+    userFirstName,
+    userLasttName,
+    providerFirstName,
+    providerLastName,
+    userimageUrl,
+    providerimageUrl,
   })
     .then((acceptedService) => {
       res.status(201).json({ acceptedService });
@@ -102,8 +105,8 @@ router.get("/:acceptedServiceId", (req, res) => {
   AcceptedService.findById(acceptedServiceId)
     .populate("requestedserviceId")
 
-    .then((foundacceptedService) => {
-      res.status(201).json({ foundacceptedService });
+    .then((foundAcceptedService) => {
+      res.status(201).json({ foundAcceptedService });
     })
 
     .catch((err) =>
