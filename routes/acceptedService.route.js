@@ -52,41 +52,41 @@ router.get("/provider/list/:providerId", (req, res) => {
 router.post("/", (req, res) => {
   const {
     userId,
-    prividerId,
+    providerId,
     requestedServiceId,
+    quantity,
     serviceCat,
     lessonType,
     rate,
     totalPrice,
-    quantity,
     userFirstName,
-    userLasttName,
+    userLastName,
     providerFirstName,
     providerLastName,
-    userimageUrl,
-    providerimageUrl,
+    userImageUrl,
+    providerImageUrl,
   } = req.body;
 
   //controlling request data
-  if (!quantity || !requestedServiceId) {
+  if (!quantity) {
     res.status(500).json({ errorMessage: " quantity is empty" });
     return;
   }
   AcceptedService.create({
     userId,
-    prividerId,
+    providerId,
     requestedServiceId,
+    quantity,
     serviceCat,
     lessonType,
     rate,
     totalPrice,
-    quantity,
     userFirstName,
-    userLasttName,
+    userLastName,
     providerFirstName,
     providerLastName,
-    userimageUrl,
-    providerimageUrl,
+    userImageUrl,
+    providerImageUrl,
   })
     .then((acceptedService) => {
       res.status(201).json({ acceptedService });
