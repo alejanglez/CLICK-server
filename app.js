@@ -13,6 +13,7 @@ const providerProfileRouter = require("./routes/provider.profile.route");
 const requestedServiceRouter = require("./routes/requestedService.route");
 const acceptedServiceRouter = require("./routes/acceptedService.route");
 const postRouter = require("./routes/post.routes");
+const answerRouter = require("./routes/answer.routes");
 
 const app = express();
 
@@ -37,5 +38,6 @@ app.use("/provider/profile", providerProfileRouter);
 app.use("/requested", requestedServiceRouter);
 app.use("/accepted", acceptedServiceRouter);
 app.use("/post", postRouter);
+app.use("/answer", answerRouter);
 
 module.exports = app;

@@ -3,23 +3,23 @@ const router = new Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
 const Provider = require("../models/Provider.model");
-const Post = require("../models/Post.model");
+const Answer = require("../models/Answer.model");
 
 // ****************************************************************************************
-// POST route to submit the form to create a post
+// ANSWER route to submit the form to create a answer
 // ****************************************************************************************
 
-// <form action="/post-create" method="POST">
+// <form action="/answer-create" method="POST">
 router.post("/create", (req, res) => {
   const { autorId, reciverId, comment, rating } = req.body;
-  Post.create({ autorId, reciverId, comment, rating })
-    .then((dbPost) => {
-      return Provider.findByIdAndUpdate(reciverId, {
-        $push: { posts: dbPost._id },
+  Answer.create({ autorId, reciverId, comment, rating })
+    .then((dbAnswer) => {
+      return User.findByIdAndUpdate(reciverId, {
+        $push: { answers: dbAnswer._id },
       });
     })
-    .then((dbPost) => {
-      res.status(201).json({ dbPost });
+    .then((dbAnswer) => {
+      res.status(201).json({ dbAnswer });
     })
     .catch((err) => {
       res
@@ -30,16 +30,16 @@ router.post("/create", (req, res) => {
 
 router.get("/list/:reciverId", (req, res) => {
   const { reciverId } = req.params;
-  Post.find({ reciverId: reciverId })
+  Answer.find({ reciverId: reciverId })
     .populate("authorId")
     // .then(dbPosts => {
     //   console.log(dbPosts);
     //   res.render('posts/list', { posts: dbPosts });
     // })
     // .catch(err => console.log(`Err while getting the posts from the DB: ${err}`));
-    .then((dbPostsList) => {
-      if (dbPostsList.length) {
-        res.status(200).json({ dbPostsList });
+    .then((dbAnswersList) => {
+      if (dbAnswersList.length) {
+        res.status(200).json({ dbAnswersList });
       } else {
         res
           .status(404)
@@ -59,15 +59,15 @@ router.get("/list/:reciverId", (req, res) => {
 // shows how to deep populate (populate the populated field)
 // ****************************************************************************************
 
-router.get("/:postId", (req, res) => {
-  const { postId } = req.params;
+router.get("/:answerId", (req, res) => {
+  const { answerId } = req.params;
 
-  Post.findById(postId)
+  Answer.findById(answerId)
     .populate("authorId")
     .populate("reciverId")
 
-    .then((foundPost) => {
-      res.status(201).json({ foundPost });
+    .then((foundAnswer) => {
+      res.status(201).json({ foundAnswer });
     })
 
     .catch((err) =>
