@@ -6,6 +6,7 @@ const Provider = require("../models/Provider.model");
 const Session = require("../models/Session.model");
 const AcceptedService = require("../models/AcceptedService.model");
 
+//to get each user request
 router.get("/user/list/:userId", (req, res) => {
   const { userId } = req.params;
 
