@@ -11,13 +11,8 @@ const Answer = require("../models/Answer.model");
 
 // <form action="/answer-create" method="POST">
 router.post("/create", (req, res) => {
-  const { autorId, reciverId, comment, rating } = req.body;
-  Answer.create({ autorId, reciverId, comment, rating })
-    .then((dbAnswer) => {
-      return User.findByIdAndUpdate(reciverId, {
-        $push: { answers: dbAnswer._id },
-      });
-    })
+  const { providerId, userId, comment, rating } = req.body;
+  Answer.create({ providerId, userId, comment, rating })
     .then((dbAnswer) => {
       res.status(201).json({ dbAnswer });
     })
@@ -28,10 +23,10 @@ router.post("/create", (req, res) => {
     });
 });
 
-router.get("/list/:reciverId", (req, res) => {
-  const { reciverId } = req.params;
-  Answer.find({ reciverId: reciverId })
-    .populate("authorId")
+router.get("/list/:userId", (req, res) => {
+  const { userId } = req.params;
+  Answer.find({ reciverId: userId })
+    .populate("providerId")
     // .then(dbPosts => {
     //   console.log(dbPosts);
     //   res.render('posts/list', { posts: dbPosts });
