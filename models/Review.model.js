@@ -3,7 +3,7 @@ const { Schema, model } = mongoose;
 
 const reviewSchema = new Schema(
   {
-    autor: {
+    author: {
       type: String,
       required: [true],
       enum: ["user", "provider"],
