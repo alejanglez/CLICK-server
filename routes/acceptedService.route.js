@@ -33,9 +33,9 @@ router.get("/provider/list/:providerId", (req, res) => {
   const { providerId } = req.params;
   console.log(providerId);
   AcceptedService.find({ providerId: providerId })
-    .then((acceptedServiceList) => {
-      if (acceptedServiceList.length) {
-        res.status(200).json({ acceptedServiceList });
+    .then((acceptedServiceList2) => {
+      if (acceptedServiceList2.length) {
+        res.status(200).json({ acceptedServiceList2 });
       } else {
         res
           .status(404)
