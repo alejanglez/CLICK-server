@@ -62,7 +62,7 @@ router.delete("/:userId", (req, res) => {
 
 router.put("/:userId/editPassword", (req, res) => {
   const { password, oldPassword } = req.body;
-
+  console.log("test", req.body, password, oldPassword);
   const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
   if (!regex.test(password)) {
     res.status(200).json({
@@ -75,17 +75,18 @@ router.put("/:userId/editPassword", (req, res) => {
   if (!regex.test(oldPassword)) {
     res.status(200).json({
       errorMessage:
-        "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
+        "oldPassword needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
     });
     return;
   }
 
   User.findById(req.params.userId)
     .then((user) => {
+      console.log("HELLLO", oldPassword, user.passwordHash);
       if (!user) {
         return res.status(200).json({ errorMessage: "wrong credentials" });
       }
-      return bcryptjs.compare(oldPassword, user.password);
+      return bcryptjs.compare(oldPassword, user.passwordHash);
     })
     .then((response) => {
       if (!response) {
@@ -96,7 +97,7 @@ router.put("/:userId/editPassword", (req, res) => {
       const salt = bcryptjs.genSaltSync();
       const hashedPassword = bcryptjs.hashSync(password, salt);
       User.findByIdAndUpdate(req.params.userId, {
-        password: hashedPassword,
+        passwordHash: hashedPassword,
       }).then(() => {
         res.json({ status: true });
       });

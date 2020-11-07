@@ -64,6 +64,7 @@ router.post("/", (req, res) => {
     quantity,
     userId,
     providerId,
+    decline: false,
   })
     .then((requestedService) => {
       res.status(201).json({ requestedService });
@@ -92,6 +93,27 @@ router.get("/:requestedServiceId", (req, res) => {
         `Err while getting a single requested service from the  DB: ${err}`
       )
     );
+});
+
+router.put("/:requestedServiceId/edit", (req, res) => {
+  const { requestedServiceId } = req.params;
+
+  RequestedService.findByIdAndUpdate(
+    { _id: requestedServiceId },
+    { decline: true },
+    { new: true }
+  )
+    .then((foundRequestedService) =>
+      res.status(200).json({
+        success: "The requested service was updated",
+        foundRequestedService,
+      })
+    )
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ errorMessage: "Internal error", errorDetail: err });
+    });
 });
 
 module.exports = router;
