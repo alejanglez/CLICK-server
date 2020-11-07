@@ -81,6 +81,53 @@ router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
     });
 });
 
+router.put("/:providerId/editPassword", (req, res) => {
+  const { password, oldPassword } = req.body;
+
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!regex.test(password)) {
+    res.status(200).json({
+      errorMessage:
+        "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
+    });
+    return;
+  }
+
+  if (!regex.test(oldPassword)) {
+    res.status(200).json({
+      errorMessage:
+        "Old password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
+    });
+    return;
+  }
+
+  Provider.findById(req.params.providerId)
+    .then((provider) => {
+      if (!provider) {
+        return res.status(200).json({ errorMessage: "wrong credentials" });
+      }
+      return bcryptjs.compare(oldPassword, provider.password);
+    })
+    .then((response) => {
+      if (!response) {
+        return res
+          .status(200)
+          .json({ errorMessage: "wrong credentials still" });
+      }
+      const salt = bcryptjs.genSaltSync();
+      const hashedPassword = bcryptjs.hashSync(password, salt);
+      Provider.findByIdAndUpdate(req.params.providerId, {
+        password: hashedPassword,
+      }).then(() => {
+        res.json({ status: true });
+      });
+    })
+    .catch((err) => {
+      console.log("err changing pw", err);
+      res.status(500).json({ errorMessage: err.message });
+    });
+});
+
 // router.get("/list/?serviceCat", (req, res, next) => {
 //   const { serviceCat } = req.query;
 

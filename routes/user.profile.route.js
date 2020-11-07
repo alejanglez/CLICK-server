@@ -60,17 +60,56 @@ router.delete("/:userId", (req, res) => {
     });
 });
 
+router.put("/:userId/editPassword", (req, res) => {
+  const { password, oldPassword } = req.body;
+
+  const regex = /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/;
+  if (!regex.test(password)) {
+    res.status(200).json({
+      errorMessage:
+        "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
+    });
+    return;
+  }
+
+  if (!regex.test(oldPassword)) {
+    res.status(200).json({
+      errorMessage:
+        "Password needs to have at least 6 chars and must contain at least one number, one lowercase and one uppercase letter.",
+    });
+    return;
+  }
+
+  User.findById(req.params.userId)
+    .then((user) => {
+      if (!user) {
+        return res.status(200).json({ errorMessage: "wrong credentials" });
+      }
+      return bcryptjs.compare(oldPassword, user.password);
+    })
+    .then((response) => {
+      if (!response) {
+        return res
+          .status(200)
+          .json({ errorMessage: "wrong credentials still" });
+      }
+      const salt = bcryptjs.genSaltSync();
+      const hashedPassword = bcryptjs.hashSync(password, salt);
+      User.findByIdAndUpdate(req.params.userId, {
+        password: hashedPassword,
+      }).then(() => {
+        res.json({ status: true });
+      });
+    })
+    .catch((err) => {
+      console.log("err changing pw", err);
+      res.status(500).json({ errorMessage: err.message });
+    });
+});
+
 router.put("/:userId/edit", fileUploader.single("image"), (req, res) => {
   const { userId } = req.params;
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    address,
-    about,
-    imageUrl,
-  } = req.body;
+  const { firstName, lastName, email, address, about, imageUrl } = req.body;
 
   // let imageUrl;
   // if (req.file) {
@@ -81,7 +120,7 @@ router.put("/:userId/edit", fileUploader.single("image"), (req, res) => {
 
   User.findByIdAndUpdate(
     { _id: userId },
-    { firstName, lastName, email, password, address, about, imageUrl },
+    { firstName, lastName, email, address, about, imageUrl },
     { new: true }
   )
     .then((user) =>

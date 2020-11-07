@@ -159,6 +159,7 @@ router.get("/session/:accessToken", (req, res) => {
   Session.findById({ _id: accessToken })
     .populate("providerId")
     .then((session) => {
+      console.log("session prov", session);
       if (!session) {
         res.status(200).json({
           errorMessage: "Session does not exist",
