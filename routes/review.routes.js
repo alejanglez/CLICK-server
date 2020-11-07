@@ -3,18 +3,18 @@ const router = new Router();
 const mongoose = require("mongoose");
 const User = require("../models/User.model");
 const Provider = require("../models/Provider.model");
-const Post = require("../models/Post.model");
+const Review = require("../models/Review.model");
 
 // ****************************************************************************************
-// POST route to submit the form to create a post
+// POST route to submit the form to create a review
 // ****************************************************************************************
 
-// <form action="/post-create" method="POST">
+// <form action="/review-create" method="POST">
 router.post("/create", (req, res) => {
-  const { userId, providerId, comment, rating } = req.body;
-  Post.create({ userId, providerId, comment, rating })
-    .then((dbPost) => {
-      res.status(201).json({ dbPost });
+  const { author, userId, providerId, comment, rating } = req.body;
+  Review.create({ author, userId, providerId, comment, rating })
+    .then((dbReview) => {
+      res.status(201).json({ dbReview });
     })
     .catch((err) => {
       res
@@ -25,12 +25,12 @@ router.post("/create", (req, res) => {
 
 router.get("/list/:providerId", (req, res) => {
   const { providerId } = req.params;
-  Post.find({ providerId: providerId })
+  Review.find({ providerId: providerId })
     .populate("userId")
 
-    .then((dbPostsList) => {
-      if (dbPostsList.length) {
-        res.status(200).json({ dbPostsList });
+    .then((dbReviewsList) => {
+      if (dbReviewsList.length) {
+        res.status(200).json({ dbReviewsList });
       } else {
         res
           .status(404)
@@ -50,15 +50,15 @@ router.get("/list/:providerId", (req, res) => {
 // shows how to deep populate (populate the populated field)
 // ****************************************************************************************
 
-router.get("/:postId", (req, res) => {
-  const { postId } = req.params;
+router.get("/:reviewId", (req, res) => {
+  const { reviewId } = req.params;
 
-  Post.findById(postId)
-    .populate("authorId")
-    .populate("reciverId")
+  Review.findById(reviewId)
+    .populate("userId")
+    .populate("providerId")
 
-    .then((foundPost) => {
-      res.status(201).json({ foundPost });
+    .then((foundReview) => {
+      res.status(201).json({ foundReview });
     })
 
     .catch((err) =>
