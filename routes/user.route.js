@@ -67,7 +67,7 @@ router.post("/signup", fileUploader.single("image"), (req, res, next) => {
     .then((salt) => bcryptjs.hash(password, salt))
     .then((hashedPassword) => {
       return User.create({
-        // username: username
+        // username: usernamefasdfsd
         firstName,
         lastName,
         email,
