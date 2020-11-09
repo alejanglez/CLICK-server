@@ -59,16 +59,31 @@ router.delete("/:providerId", (req, res) => {
 
 router.put("/:providerId/edit", fileUploader.single("image"), (req, res) => {
   const { providerId } = req.params;
-  const { firstName, lastName, email, password, address, about } = req.body;
-  let imageUrl;
-  if (req.file) {
-    imageUrl = req.file.path;
-  } else {
-    imageUrl = req.body.existingImage;
-  }
+  const {
+    firstName,
+    lastName,
+    email,
+    address,
+    about,
+    lessonType,
+    serviceCat,
+    rate,
+    facebookUrl,
+  } = req.body;
+
   Provider.findByIdAndUpdate(
     { _id: providerId },
-    { firstName, lastName, email, password, address, about },
+    {
+      firstName,
+      lastName,
+      email,
+      address,
+      about,
+      lessonType,
+      serviceCat,
+      rate,
+      facebookUrl,
+    },
     { new: true }
   )
     .then((provider) =>
