@@ -20,7 +20,6 @@
 - Private message and contact – BACKLOG
 - Notifications by email - BACKLOG
 
-
 ## Description
 
 This is an app that connects familily´s children who need support with academic services of providers.
@@ -317,62 +316,62 @@ SESSION
 
 const{ObjectId}=schema.types.OjectId,
 {
-  userId: { type: ObjectId, ref: "User" },
-  providerId: { type: ObjectId, ref: "Provider" },
-  createdAt: {
-    type: Date,
-    default: Date.now(),
-    index: { expires: 60 * 60 * 24 },
-  },
+userId: { type: ObjectId, ref: "User" },
+providerId: { type: ObjectId, ref: "Provider" },
+createdAt: {
+type: Date,
+default: Date.now(),
+index: { expires: 60 _ 60 _ 24 },
+},
 }
 
 <br>
 
 ## API Endpoints (backend routes)
 
-| HTTP Method | URL                        | Request Body            | Success status | Error Status | Description                                                                                                                     |
-| ----------- | -------------------------- | ----------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
-| GET         | `/provider/session/:accessToken `           | Saved session           | 200            | 404          | Check if user is logged in and return profile page                                                                              |
-| POST        | `/provider/signup`             | {name, email, password} | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST        | `/provider/login`              | {username, password}    | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session              |
-| POST        | `/provider/logout`             | (empty)                 | 204            | 400          | Logs out the user                                            | POST        | `/provider/image`             | (image)                 | 204            | 400          | upload image                                                |
-| GET         | `/user/session/:accessToken `           | Saved session           | 200            | 404          | Check if user is logged in and return profile page                                                                              |
-| POST        | `/user/signup`             | {name, email, password} | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
-| POST        | `/user/login`              | {username, password}    | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session              |
-| POST        | `/user/logout`             | (empty)                 | 204            | 400          | Logs out the user                                               | POST        | `/user/image`             | (image)                 | 204            | 400          | upload image                                                                                                               |
-| GET         | `/provider/profile/list`    |                         | 200               | 500          | Show series elements                                       |
-| GET         | `/provider/profile/list/:Shearch`    |                         | 200               | 500          | Show Provider Feed                                       |
-| GET         | `/provider/profile/list/:providerid`     |                         | 200               | 500             | Show specific element                                                                                                           |
-| PUT         | `/provider/profile/:id`     |                         | 200            | 500          | Edit specific element                                                                                                           |
-| DELETE      | `/provider/profile/:id`     |                         | 201            | 500          | delete element                                                                                                                  |                                                               |
-| GET         | `/provider/profile/:providerid`         |                         |                |              | Show specific element                                                                                                           |
-| PUT         | `/provider/profile/:providerid`         |                         | 200            | 500          | Edit specific element                              
-| PUT         | `/provider/profile/:providerid/editpassword`         |                         | 200            | 500          | Edit specific password              |
-| DELETE      | `/provider/profile/:providerid`         |                         | 201            | 500          | delete element                                                                                                                  |
-| GET         | `/user/profile/list`    |                         | 200               | 500          | Show series elements                                       |
-| GET         | `/user/profile/list/:Userid`     |                         | 200               | 500             | Show specific element                               |
-| PUT         | `/user/profile/:id`     |                         | 200            | 500          | Edit specific element                                              |
-| DELETE      | `/user/profile/:id`     |                         | 201            | 500          | delete element                                                     |
-| GET         | `/user/profile/:Userid`         |                         |                |              | Show specific element                                      |
-| PUT         | `/user/profile/:Userid`         |                         | 200            | 500          | Edit specific element                              
-| PUT         | `/user/profile/:Userid/editpassword`         |                         | 200            | 500          | Edit specific password              |
-| DELETE      | `/user/profile/:Userid`         |                         | 201            | 500          | delete element                                     |
-| POST        | `/requestedservice/create` |                         | 204            | 500          | Ask for service, and create requested service.                                                                                  |
-| GET         | `/requestservice`          |                         | 204            | 500          | Show ask service page                                                                                                           |
-| GET         | `/requestedservice/:requestedServiceId`    |                         | 204            | 500          | Show specific requestedservice                                                                                                  |
-| GET         | `/requestedservice/provider/list/:providerId    |                         | 204            | 500          | Show series requestedservice                                                                                                    |
-| GET         | `/requestedservice/user/list/:userId    |                         | 204            | 500          | Show series requestedservice                                                                                                    |
-| POST        | `/requestedservice/create`  |                         | 204            | 500          | Accept for service, and create requested service.                                                                               |
-| PUT        | `/requestedservice/:requestedServiceId/edit`  |                         | 204            | 500          | Edit requested service                                                                               |
-| GET         | `/acceptedservice/:acceptedServiceId`     |                         | 204            | 500          | Show specific acceptedservice                                                                                                   |
-| GET         | `/acceptedservice/provider/list/:providerId     |                         | 204            | 500          | Show series acceptedservice                                                                                                     |
-| GET         | `/acceptedservice/user/list/:userId     |                         | 204            | 500          | Show series acceptedservice                                                                                                     |
-| POST        | `/acceptedService/create`           |                         | 204            | 500          | create a review                                                                                                                 |
-| POST        | `/review/create`           |                         | 204            | 500          | create a review                                                                                                                 |
-| GET         | `/review/:reviewid`              |                         | 204            | 500          | Show specific review                                                                                                            |
-| GET         | `/review/provider/list/:providerId`             |                         | 204            | 500          | Show series review                                                                                                              |
-| GET         | `/review/user/list/:userId`             |                         | 204            | 500          | Show series review                                                                                                    |          
-                                                         
+| HTTP Method | URL                                          | Request Body            | Success status | Error Status | Description                                                                                                                     |
+| ----------- | -------------------------------------------- | ----------------------- | -------------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| GET         | `/provider/session/:accessToken `            | Saved session           | 200            | 404          | Check if user is logged in and return profile page                                                                              |
+| POST        | `/provider/signup`                           | {name, email, password} | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/provider/login`                            | {username, password}    | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session              |
+| POST        | `/provider/logout`                           | (empty)                 | 204            | 400          | Logs out the user                                                                                                               | POST | `/provider/image` | (image) | 204 | 400 | upload image |
+| GET         | `/user/session/:accessToken `                | Saved session           | 200            | 404          | Check if user is logged in and return profile page                                                                              |
+| POST        | `/user/signup`                               | {name, email, password} | 201            | 404          | Checks if fields not empty (422) and user not exists (409), then create user with encrypted password, and store user in session |
+| POST        | `/user/login`                                | {username, password}    | 200            | 401          | Checks if fields not empty (422), if user exists (404), and if password matches (404), then stores user in session              |
+| POST        | `/user/logout`                               | (empty)                 | 204            | 400          | Logs out the user                                                                                                               | POST | `/user/image` | (image) | 204 | 400 | upload image |
+| GET         | `/provider/profile/list`                     |                         | 200            | 500          | Show series elements                                                                                                            |
+| GET         | `/provider/profile/list/:Shearch`            |                         | 200            | 500          | Show Provider Feed                                                                                                              |
+| GET         | `/provider/profile/list/:providerid`         |                         | 200            | 500          | Show specific element                                                                                                           |
+| PUT         | `/provider/profile/:id`                      |                         | 200            | 500          | Edit specific element                                                                                                           |
+| DELETE      | `/provider/profile/:id`                      |                         | 201            | 500          | delete element                                                                                                                  |  |
+| GET         | `/provider/profile/:providerid`              |                         |                |              | Show specific element                                                                                                           |
+| PUT         | `/provider/profile/:providerid`              |                         | 200            | 500          | Edit specific element                                                                                                           |
+| PUT         | `/provider/profile/:providerid/editpassword` |                         | 200            | 500          | Edit specific password                                                                                                          |
+| DELETE      | `/provider/profile/:providerid`              |                         | 201            | 500          | delete element                                                                                                                  |
+| GET         | `/user/profile/list`                         |                         | 200            | 500          | Show series elements                                                                                                            |
+| GET         | `/user/profile/list/:Userid`                 |                         | 200            | 500          | Show specific element                                                                                                           |
+| PUT         | `/user/profile/:id`                          |                         | 200            | 500          | Edit specific element                                                                                                           |
+| DELETE      | `/user/profile/:id`                          |                         | 201            | 500          | delete element                                                                                                                  |
+| GET         | `/user/profile/:Userid`                      |                         |                |              | Show specific element                                                                                                           |
+| PUT         | `/user/profile/:Userid`                      |                         | 200            | 500          | Edit specific element                                                                                                           |
+| PUT         | `/user/profile/:Userid/editpassword`         |                         | 200            | 500          | Edit specific password                                                                                                          |
+| DELETE      | `/user/profile/:Userid`                      |                         | 201            | 500          | delete element                                                                                                                  |
+| POST        | `/requestedservice/create`                   |                         | 204            | 500          | Ask for service, and create requested service.                                                                                  |
+| GET         | `/requestservice`                            |                         | 204            | 500          | Show ask service page                                                                                                           |
+| GET         | `/requestedservice/:requestedServiceId`      |                         | 204            | 500          | Show specific requestedservice                                                                                                  |
+| GET         | `/requestedservice/provider/list/:providerId |                         | 204            | 500          | Show series requestedservice                                                                                                    |
+| GET         | `/requestedservice/user/list/:userId         |                         | 204            | 500          | Show series requestedservice                                                                                                    |
+| POST        | `/requestedservice/create`                   |                         | 204            | 500          | Accept for service, and create requested service.                                                                               |
+| PUT         | `/requestedservice/:requestedServiceId/edit` |                         | 204            | 500          | Edit requested service                                                                                                          |
+| GET         | `/acceptedservice/:acceptedServiceId`        |                         | 204            | 500          | Show specific acceptedservice                                                                                                   |
+| GET         | `/acceptedservice/provider/list/:providerId  |                         | 204            | 500          | Show series acceptedservice                                                                                                     |
+| GET         | `/acceptedservice/user/list/:userId          |                         | 204            | 500          | Show series acceptedservice                                                                                                     |
+| POST        | `/acceptedService/create`                    |                         | 204            | 500          | create a review                                                                                                                 |
+| POST        | `/review/create`                             |                         | 204            | 500          | create a review                                                                                                                 |
+| GET         | `/review/:reviewid`                          |                         | 204            | 500          | Show specific review                                                                                                            |
+| GET         | `/review/provider/list/:providerId`          |                         | 204            | 500          | Show series review                                                                                                              |
+| GET         | `/review/user/list/:userId`                  |                         | 204            | 500          | Show series review                                                                                                              |
+
 <br>
 
 ## Links
