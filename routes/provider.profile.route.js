@@ -121,7 +121,7 @@ router.put("/:providerId/editPassword", (req, res) => {
       if (!provider) {
         return res.status(200).json({ errorMessage: "wrong credentials" });
       }
-      return bcryptjs.compare(oldPassword, provider.password);
+      return bcryptjs.compare(oldPassword, provider.passwordHash);
     })
     .then((response) => {
       if (!response) {
@@ -132,7 +132,7 @@ router.put("/:providerId/editPassword", (req, res) => {
       const salt = bcryptjs.genSaltSync();
       const hashedPassword = bcryptjs.hashSync(password, salt);
       Provider.findByIdAndUpdate(req.params.providerId, {
-        password: hashedPassword,
+        passwordHash: hashedPassword,
       }).then(() => {
         res.json({ status: true });
       });
