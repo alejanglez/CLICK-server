@@ -372,8 +372,7 @@ const{ObjectId}=schema.types.OjectId,
 | GET         | `/review/:reviewid`              |                         | 204            | 500          | Show specific review                                                                                                            |
 | GET         | `/review/provider/list/:providerId`             |                         | 204            | 500          | Show series review                                                                                                              |
 | GET         | `/review/user/list/:userId`             |                         | 204            | 500          | Show series review                                                                                                    |          
-                                                                |
-
+                                                         
 <br>
 
 ## Links
