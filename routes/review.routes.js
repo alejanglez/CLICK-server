@@ -23,7 +23,7 @@ router.post("/create", (req, res) => {
     });
 });
 
-router.get("/list/:providerId", (req, res) => {
+router.get("/provider/list/:providerId", (req, res) => {
   const { providerId } = req.params;
   Review.find({ providerId: providerId })
     .populate("userId")
@@ -31,6 +31,28 @@ router.get("/list/:providerId", (req, res) => {
     .then((dbReviewsList) => {
       if (dbReviewsList.length) {
         res.status(200).json({ dbReviewsList });
+      } else {
+        res
+          .status(404)
+          .json({ errorMessage: "No resquested services were found" });
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+      res
+        .status(500)
+        .json({ errorMessage: "Internal error", errorDetail: err });
+    });
+});
+
+router.get("/user/list/:userId", (req, res) => {
+  const { userId } = req.params;
+  Review.find({ userId: userId })
+    .populate("providerId")
+
+    .then((dbReviewsList2) => {
+      if (dbReviewsList2.length) {
+        res.status(200).json({ dbReviewsList2 });
       } else {
         res
           .status(404)
