@@ -32,6 +32,10 @@ const acceptedServiceSchema = new Schema(
     userLastName: { type: String, required: true, maxlength: 20 },
     providerFirstName: { type: String, required: true, maxlength: 20 },
     providerLastName: { type: String, required: true, maxlength: 20 },
+    date: {
+      type: Date,
+      default: Date.now(),
+    },
     userImageUrl: {
       type: String,
       default:

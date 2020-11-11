@@ -53,7 +53,7 @@ router.get("/provider/list/:providerId", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { quantity, userId, providerId } = req.body;
+  const { quantity, userId, providerId, date } = req.body;
 
   //controlling request data
   if (!quantity) {
@@ -64,6 +64,7 @@ router.post("/", (req, res) => {
     quantity,
     userId,
     providerId,
+    date,
     decline: false,
   })
     .then((requestedService) => {

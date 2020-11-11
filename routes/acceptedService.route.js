@@ -66,6 +66,7 @@ router.post("/", (req, res) => {
     providerLastName,
     userImageUrl,
     providerImageUrl,
+    date,
   } = req.body;
 
   //controlling request data
@@ -88,6 +89,7 @@ router.post("/", (req, res) => {
     providerLastName,
     userImageUrl,
     providerImageUrl,
+    date,
   })
     .then((acceptedService) => {
       res.status(201).json({ acceptedService });

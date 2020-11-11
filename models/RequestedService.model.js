@@ -6,6 +6,9 @@ const requestedServiceSchema = new Schema(
     userId: { type: mongoose.ObjectId, ref: "User", required: true },
     providerId: { type: mongoose.ObjectId, ref: "Provider", required: true },
     quantity: { type: Number, default: 0 },
+    date: {
+      type: String,
+    },
     decline: { type: Boolean, default: false, required: true },
   },
   {
