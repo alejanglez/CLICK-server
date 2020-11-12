@@ -17,21 +17,21 @@ router.post("/image", fileUploader.single("image"), (req, res) => {
 });
 
 // GET route => to get a list of profiles view
-router.get("/list", (req, res) => {
-  User.find()
-    .then((userProfiles) => {
-      if (userProfiles.length) {
-        res.status(200).json({ userProfiles });
-      } else {
-        res.status(404).json({ errorMessage: "No user profiles were found" });
-      }
-    })
-    .catch((err) => {
-      res
-        .status(500)
-        .json({ errorMessage: "Internal error", errorDetail: err });
-    });
-});
+// router.get("/list", (req, res) => {
+//   User.find()
+//     .then((userProfiles) => {
+//       if (userProfiles.length) {
+//         res.status(200).json({ userProfiles });
+//       } else {
+//         res.status(404).json({ errorMessage: "No user profiles were found" });
+//       }
+//     })
+//     .catch((err) => {
+//       res
+//         .status(500)
+//         .json({ errorMessage: "Internal error", errorDetail: err });
+//     });
+// });
 
 // GET route => to get a specific profile/detailed view
 router.get("/list/:userId", (req, res, next) => {
@@ -111,13 +111,6 @@ router.put("/:userId/editPassword", (req, res) => {
 router.put("/:userId/edit", fileUploader.single("image"), (req, res) => {
   const { userId } = req.params;
   const { firstName, lastName, email, address, about, imageUrl } = req.body;
-
-  // let imageUrl;
-  // if (req.file) {
-  //   imageUrl = req.file.path;
-  // } else {
-  //   imageUrl = req.body.existingImage;
-  // }
 
   User.findByIdAndUpdate(
     { _id: userId },
