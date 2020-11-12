@@ -1,9 +1,6 @@
 const { Router } = require("express");
 const router = new Router();
 const mongoose = require("mongoose");
-const User = require("../models/User.model");
-const Provider = require("../models/Provider.model");
-const Session = require("../models/Session.model");
 const AcceptedService = require("../models/AcceptedService.model");
 
 //to get each user request
@@ -67,6 +64,7 @@ router.post("/", (req, res) => {
     userImageUrl,
     providerImageUrl,
     date,
+    startingTime,
   } = req.body;
 
   //controlling request data
@@ -90,6 +88,7 @@ router.post("/", (req, res) => {
     userImageUrl,
     providerImageUrl,
     date,
+    startingTime,
   })
     .then((acceptedService) => {
       res.status(201).json({ acceptedService });

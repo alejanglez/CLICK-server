@@ -35,6 +35,9 @@ const acceptedServiceSchema = new Schema(
     date: {
       type: String,
     },
+    startingTime: {
+      type: String,
+    },
     userImageUrl: {
       type: String,
       default:

@@ -1,9 +1,6 @@
 const { Router } = require("express");
 const router = new Router();
 const mongoose = require("mongoose");
-const User = require("../models/User.model");
-const Provider = require("../models/Provider.model");
-const Session = require("../models/Session.model");
 const RequestedService = require("../models/RequestedService.model");
 
 router.get("/user/list/:userId", (req, res) => {
@@ -53,7 +50,7 @@ router.get("/provider/list/:providerId", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { quantity, userId, providerId, date } = req.body;
+  const { quantity, userId, providerId, date, startingTime } = req.body;
 
   //controlling request data
   if (!quantity) {
@@ -65,6 +62,7 @@ router.post("/", (req, res) => {
     userId,
     providerId,
     date,
+    startingTime,
     decline: false,
   })
     .then((requestedService) => {

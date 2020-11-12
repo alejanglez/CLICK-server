@@ -9,6 +9,9 @@ const requestedServiceSchema = new Schema(
     date: {
       type: String,
     },
+    startingTime: {
+      type: String,
+    },
     decline: { type: Boolean, default: false, required: true },
   },
   {
