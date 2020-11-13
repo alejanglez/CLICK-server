@@ -56,7 +56,7 @@ router.get("/user/list/:userId", (req, res) => {
       } else {
         res
           .status(404)
-          .json({ errorMessage: "No resquested services were found" });
+          .json({ errorMessage: "No requested services were found" });
       }
     })
     .catch((err) => {
