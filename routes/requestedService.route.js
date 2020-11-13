@@ -64,6 +64,7 @@ router.post("/", (req, res) => {
     date,
     startingTime,
     decline: false,
+    isAccepted: false,
   })
     .then((requestedService) => {
       res.status(201).json({ requestedService });
@@ -105,6 +106,27 @@ router.put("/:requestedServiceId/edit", (req, res) => {
     .then((foundRequestedService) =>
       res.status(200).json({
         success: "The requested service was updated",
+        foundRequestedService,
+      })
+    )
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ errorMessage: "Internal error", errorDetail: err });
+    });
+});
+
+router.put("/:requestedServiceId/editState", (req, res) => {
+  const { requestedServiceId } = req.params;
+
+  RequestedService.findByIdAndUpdate(
+    { _id: requestedServiceId },
+    { isAccepted: true },
+    { new: true }
+  )
+    .then((foundRequestedService) =>
+      res.status(200).json({
+        success: "The requested service was updated to isAccepted",
         foundRequestedService,
       })
     )

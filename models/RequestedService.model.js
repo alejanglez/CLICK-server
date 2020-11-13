@@ -13,6 +13,7 @@ const requestedServiceSchema = new Schema(
       type: String,
     },
     decline: { type: Boolean, default: false, required: true },
+    isAccepted: { type: Boolean, default: false },
   },
   {
     timestamps: true,
